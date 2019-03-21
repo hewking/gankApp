@@ -21,11 +21,12 @@ import {
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
 import NewsDetail from './NewsDetail'
-
+import ImageDetail from './ImageDetail'
 
 const TAB = createMaterialTopTabNavigator({
   Home: HomeScreen,
-  GIRL: GirlScreen
+  GIRL: GirlScreen,
+
 }, {
   tabBarOptions: {
     activeTintColor: '#4d3241',
@@ -52,15 +53,24 @@ const TAB = createMaterialTopTabNavigator({
 
 const HomeStack = createStackNavigator({
   Home: TAB,
-  Detail:NewsDetail
+  Detail:NewsDetail,
+  // ImageDetail:ImageDetail
 }, {
   defaultNavigationOptions: {
-
+    headerTintColor: '#fff',
+    headerStyle: {
+      backgroundColor: '#4d3241',
+    },
+  },
+  navigationOptions: {
+    tabBarLabel: 'Home!',
   }
 })
 
 const GirlStack = createStackNavigator({
-  Girl: GirlScreen
+  // Girl: GirlScreen,
+  // ImageDetail:ImageDetail
+  News:NewsDetail
 }, {
   defaultNavigationOptions: {
 
@@ -72,11 +82,10 @@ const GirlStack = createStackNavigator({
 //   TabNav : TabNavigator,
 //   Detail:NewsDetail
 // })
-
 const TabNavigator = createBottomTabNavigator({
   Home: HomeStack,
   // Girl: GirlStack,
-  Girl:HomeStack
+  Girl:GirlStack
 
 }, {
   // 自定义底部tab

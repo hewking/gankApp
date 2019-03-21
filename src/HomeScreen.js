@@ -1,13 +1,24 @@
 
 import React,{Component} from 'react'
 import {View,StyleSheet,Text,Image,FlatList
-    ,ProgressBarAndroid,SectionList,StatusBar,ToastAndroid} from 'react-native'
+    ,ProgressBarAndroid,SectionList,StatusBar,ToastAndroid,TouchableOpacity} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
 export default class HomeScreen extends Component {
+
+    static navigationOptions = {
+        title:'Home',
+        headerStyle:{
+            backgroundColor:'#4d3241'
+        },
+        headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+    }
 
     constructor(props){
         super(props)
@@ -17,6 +28,8 @@ export default class HomeScreen extends Component {
             data: [],
             category:[],
         }
+
+        this.bindItem = this.bindItem.bind(this)
     }
 
     render(){
@@ -52,12 +65,15 @@ export default class HomeScreen extends Component {
 
     bindItem({item}) {
         // if (item.images) {
-            return (<View style = {styles.container}>
+            return (
                 <TouchableOpacity style={styles.touchable}
                 onPress={() => {
-                    // this.props.navigation.navigate('Detail')
+                    this.props.navigation.navigate('Detail',{
+                        url:item.url
+                    })
                     ToastAndroid.show('detail',ToastAndroid.SHORT)
                 }}>
+                <View style = {styles.container}>
                 <View style={{width:'100%'}}>
                 
                 <Text style={styles.text}>{item.desc}</Text>
@@ -67,10 +83,10 @@ export default class HomeScreen extends Component {
                 <Text style={{flex:2}}>发布日期:{item.publishedAt}</Text>
                 </View>
                 </View>
-           
+                </View>
                 </TouchableOpacity>
     
-            </View>)
+            )
         // } else {
         
 
