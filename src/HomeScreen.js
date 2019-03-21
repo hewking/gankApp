@@ -64,7 +64,7 @@ export default class HomeScreen extends Component {
     }
 
     bindItem({item}) {
-        // if (item.images) {
+
             return (
                 <TouchableOpacity style={styles.touchable}
                 onPress={() => {
@@ -74,42 +74,19 @@ export default class HomeScreen extends Component {
                     ToastAndroid.show('detail',ToastAndroid.SHORT)
                 }}>
                 <View style = {styles.container}>
-                <View style={{width:'100%'}}>
-                
-                <Text style={styles.text}>{item.desc}</Text>
-                <Text>类型:{item.type}</Text>
-                <View style={{flexDirection:'row'}}>
-                <Text style={{flex:1}}>作者:{item.who}</Text>
-                <Text style={{flex:2}}>发布日期:{item.publishedAt}</Text>
-                </View>
+                    <View style={{width:'100%'}}>
+                        {item.images && (<Image source={{uri:item.images[0]}} style={{width:'100%'}}/>)}
+                        <Text style={styles.text}>{item.desc}</Text>
+                        <Text>类型:{item.type}</Text>
+                        <View style={{flexDirection:'row'}}>
+                        <Text style={{flex:1}}>作者:{item.who}</Text>
+                        <Text style={{flex:2}}>发布日期:{item.publishedAt}</Text>
+                    </View>
                 </View>
                 </View>
                 </TouchableOpacity>
     
             )
-        // } else {
-        
-
-        //     return (<View style = {styles.container}>
-        //         <TouchableOpacity style={styles.touchable}
-        //         onPress={() => {
-        //             ToastAndroid.show('detail',ToastAndroid.SHORT)
-        //         }}>
-        //         <View style={{width:'100%'}}>
-        //         <Image source={item.images[0]} style={{height:200}}/>
-        //         <Text style={styles.text}>{item.desc}</Text>
-        //         <Text>类型:{item.type}</Text>
-        //         <View style={{flexDirection:'row'}}>
-        //         <Text style={{flex:1}}>作者:{item.who}</Text>
-        //         <Text style={{flex:2}}>发布日期:{item.publishedAt}</Text>
-        //         </View>
-        //         </View>
-           
-        //         </TouchableOpacity>
-    
-        //     </View>)
-        // }
-        
     }
 
     componentDidMount(){
