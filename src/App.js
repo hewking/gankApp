@@ -15,18 +15,20 @@ import {
   createBottomTabNavigator,
   createAppContainer,
   createTabNavigator,
-  createMaterialTopTabNavigator
+  createMaterialTopTabNavigator,
+  createDrawerNavigator
 } from 'react-navigation'
 // import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
 import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import Setting from './SettingScreen'
 
 const TAB = createMaterialTopTabNavigator({
   Home: HomeScreen,
   GIRL: GirlScreen,
-
 }, {
   tabBarOptions: {
     activeTintColor: '#4d3241',
@@ -77,6 +79,16 @@ const GirlStack = createStackNavigator({
   }
 })
 
+const Drawer = createDrawerNavigator({
+  HOME:HomeStack,
+  Setting:Setting
+},{
+  navigationOptions:{
+      drawerLockMode:'locked-closed',
+  },
+  backBehavior:'none'
+})
+
 // root stack
 // const RootStack = createStackNavigator({
 //   TabNav : TabNavigator,
@@ -97,8 +109,20 @@ const TabNavigator = createBottomTabNavigator({
       horizontal,
       tintColor
     }) => {
-      return <Image source = './res/back.png'/>
-    }
+      const { routeName } = navigation.state;
+      let IconComponent = Ionicons;
+      let iconName;
+      if (routeName === 'Home') {
+        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        // Sometimes we want to add badges to some icons. 
+        // You can check the implementation below.
+        IconComponent = HomeIconWithBadge; 
+      } else if (routeName === 'Settings') {
+        iconName = `ios-options`;
+      }
+
+      // You can return any component that you like here!
+      return <IconComponent name={iconName} size={25} color={tintColor} />;    }
   },
 
   tabBarOptions: {
@@ -130,18 +154,24 @@ const styles = StyleSheet.create({
   }
 })
 
-const Container = createAppContainer(TabNavigator)
+// const Container = createAppContainer(Drawer)
 
-export default Container
+// export default Container
+
+const Model = createStackNavigator({
+    Drawer:Drawer
+})
 
 export class Navigation extends React.Component {
   render() {
     return ([ < StatusBar key = 'statusbar'
       barStyle = 'light-content' /> ,
-      Container
+      <Model/>
     ])
   }
 }
+
+export default createAppContainer(Model)
 
 // export default createAppContainer(TabNavigator)
 // export default TabNavigator
