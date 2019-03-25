@@ -18,6 +18,9 @@ import {
   createMaterialTopTabNavigator,
   createDrawerNavigator
 } from 'react-navigation'
+
+// import {BottomTabBar} from 'react-navigation-tabs'
+
 // import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
@@ -25,6 +28,8 @@ import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Setting from './SettingScreen'
+
+// const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
 
 const TAB = createMaterialTopTabNavigator({
   Home: HomeScreen,
@@ -94,16 +99,38 @@ const Drawer = createDrawerNavigator({
 //   TabNav : TabNavigator,
 //   Detail:NewsDetail
 // })
-const TabNavigator = createBottomTabNavigator({
-  Home: HomeStack,
+const BottomTabNavigator = createBottomTabNavigator({
+  Home: {
+    screen:HomeStack,
+    navigationOptions:{
+      tabBarLabel:'主页',
+      tabBarIcon:({tintColor,focused}) => {
+        <Ionicons
+          name={'ios-add'}
+          size={26}
+          color={tintColor}
+        />
+      }
+    }
+  },
   // Girl: GirlStack,
-  Girl:GirlStack
+  Girl:{
+    screen:GirlScreen,
+    navigationOptions:{
+      tabBarLabel:'妹子',
+      tabBarIcon:({tintColor,focused}) => (
+        <Ionicons
+          name={'app-store-ios'}
+          size={26}
+          color={tintColor}
+        />
+      )
+    }
+  }
 
 }, {
   // 自定义底部tab
-  defaultNavigationOptions: ({
-    navigation
-  }) => {
+  defaultNavigationOptions: ({navigation}) => {
     tabBarIcon: ({
       focused,
       horizontal,
@@ -145,7 +172,17 @@ const TabNavigator = createBottomTabNavigator({
     indicatorStyle: {
       backgroundColor: '#fff'
     },
+    showIcon:'true',
+    showLabel:'false',
+    inactiveTintColor:'skyblue',
+    // iconStyle:''
   }
+  ,
+  initialRouteName:'Girl',
+  backBehavior:'initialRoute',
+  // tabBarComponent:props => {
+  //   <TabBarComponent {...props} style={{borderTopColor:'#605f60'}}/>
+  // }
 })
 
 const styles = StyleSheet.create({
@@ -171,7 +208,7 @@ export class Navigation extends React.Component {
   }
 }
 
-export default createAppContainer(Model)
+export default createAppContainer(BottomTabNavigator)
 
 // export default createAppContainer(TabNavigator)
 // export default TabNavigator
