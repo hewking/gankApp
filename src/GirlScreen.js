@@ -5,8 +5,10 @@ import {View,StyleSheet,Text,Image
 ,FlatList} from 'react-native'
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ImageDetail from './ImageDetail'
+import RefreshFooter from './component/refreshList/RefreshFooter';
+import RefreshState from './component/refreshList/RefreshState';
 
-const REQUEST_URL = 'http://gank.io/api/data/福利/10/1'
+const REQUEST_URL = 'http://gank.io/api/data/福利'
 
 class GirlScreen extends Component {
 
@@ -28,10 +30,12 @@ class GirlScreen extends Component {
         this.state = {
             isLoad : false,
             data:[],
+            footerState : RefreshState.Idle,
         }
 
         // 如果不bind， this 不是指向外部 component ,navigation 这个值为Null
         this.bindItem = this.bindItem.bind(this)
+        this.mPage = 0
     }
 
     render(){
@@ -41,11 +45,41 @@ class GirlScreen extends Component {
                     data={this.state.data}
                     renderItem={this.bindItem}
                     keyExtractor={(item) => item._id}
+                    ref={(list) => this._flatList = list}
+                    onRefresh = {() => {
+                        this._onRefreshEnd()
+                        this._refreshData()
+                    }}
+                    refreshing = {false}
+                    onEndReached={this._loadMore()}
+                    onEndReachedThreshold={0.1}
+                    ListFooterComponent={this._renderFooter}
                 />
             </View>)
         } else {
             return this.renderLoadingView()
         }
+    }
+
+    _onRefreshEnd(){
+        this._flatList.refreshing = false
+    }
+
+    _loadMore(){
+        this.fetchData(++this.mPage)
+    }
+
+    _renderFooter(){
+        // let loadState = this.state.footerState
+        // if (typeof loadState === 'undefined') {
+            // loadState = RefreshState.LoadMore
+        // }
+        return (<RefreshFooter
+            state={RefreshState.LoadMore}
+            onRetryLoading={()=> {
+                this._loadMore()
+            }}
+        />)
     }
 
     renderLoadingView(){
@@ -80,16 +114,42 @@ class GirlScreen extends Component {
         this.fetchData()
     }
 
-    fetchData(){
-        fetch(REQUEST_URL).then((resp) => {
+    fetchData(page = this.mPage){
+        let url = REQUEST_URL + `/${10}/${++page}`
+        fetch(url).then((resp) => {
             return resp.json()
         }).then(respData => {
+            let results = respData.results
+            let footerState = this.state.footerState
+            if (results && results.size < 10) {
+                footerState = RefreshState.NoMore
+            }
+
+            if (results === null) {
+                footerState = RefreshState.Failure
+            }
+
+            if (typeof footerState === 'undefined') {
+                footerState = RefreshFooter.Idle
+            }
+
             this.setState({
                 isLoad:true,
-                data:respData.results
+                data:this.state.data.concat(respData.results),
+                footerState:footerState
             })
+            this._onRefreshEnd()
         })
     }
+
+    _refreshData(){
+        // 第一页
+        this.mPage = 0
+        this.state.data = []
+        this.fetchData(this.mPage)
+    }
+
+
 }
 
 const styles = StyleSheet.create({
