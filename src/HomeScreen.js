@@ -4,6 +4,7 @@ import {View,StyleSheet,Text,Image,FlatList
     ,ProgressBarAndroid,SectionList,StatusBar,ToastAndroid,TouchableOpacity} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
+import ToastExample  from './component/ToastExample'
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
@@ -69,6 +70,7 @@ export default class HomeScreen extends Component {
             return (
                 <TouchableOpacity style={styles.touchable}
                 onPress={() => {
+                    ToastExample.show('native',ToastExample.SHORT)
                     this.props.navigation.navigate('Detail',{
                         url:item.url,
                         title:item.url,
@@ -103,6 +105,13 @@ export default class HomeScreen extends Component {
                 data:this.state.data.concat(respData.results.Android),
                 category:this.state.category.concat(respData.category)
             })
+        })
+    }
+
+    async loadData(){
+        let data = await fetch(REQUEST_URL).then(resp => resp.json())
+        .then(respData => {
+            
         })
     }
 

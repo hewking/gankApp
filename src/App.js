@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import {
   createStackNavigator,
-  createBottomTabNavigator,
+  // createBottomTabNavigator,
   createAppContainer,
   createTabNavigator,
   createMaterialTopTabNavigator,
@@ -22,18 +22,24 @@ import {
 
 import {Context} from './context'
 
-// import {BottomTabBar} from 'react-navigation-tabs'
+import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
+import fontelloConfig from './font/config.json'
 
-// import Icon from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
 import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Setting from './SettingScreen'
 import { Colors } from './DesignSystem';
 
+import { createIconSetFromFontello } from 'react-native-vector-icons'
+
+
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
+
+const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 const TAB = createMaterialTopTabNavigator({
   Home: {screen:HomeScreen,
@@ -82,7 +88,7 @@ const HomeStack = createStackNavigator({
     },
   },
   navigationOptions: {
-    tabBarLabel: 'Home!',
+    tabBarLabel: '主页',
   }
 })
 
@@ -92,6 +98,7 @@ const GirlStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
       header:null,
+      tabBarLabel:'妹子'
   }
 })
 
@@ -111,16 +118,22 @@ const Drawer = createDrawerNavigator({
 //   Detail:NewsDetail
 // })
 const BottomTabNavigator = createBottomTabNavigator({
+  // tabBarComponent: props =>
+  //     <TabBarComponent
+  //       {...props}
+  //       style={{ borderTopColor: '#605F60' }}
+  //     />,
   Home: {
     screen:HomeStack,
     navigationOptions:{
       tabBarLabel:'主页',
       tabBarIcon:({tintColor,focused}) => {
-        <Ionicons
-          name={'ios-add'}
+        let iconName = `infocirlce`
+        return (<AntDesign
+          name= {iconName}
           size={26}
           color={tintColor}
-        />
+        />)
       }
     }
   },
@@ -129,13 +142,14 @@ const BottomTabNavigator = createBottomTabNavigator({
     screen:GirlStack,
     navigationOptions:{
       tabBarLabel:'妹子',
-      tabBarIcon:({tintColor,focused}) => (
-        <Ionicons
-          name={'app-store-ios'}
+      tabBarIcon:({tintColor,focused}) => {
+        let iconName = `minuscircle`
+        return (<AntDesign
+          name= {iconName}
           size={26}
           color={tintColor}
-        />
-      )
+        />)
+    }
     }
   }
 
@@ -144,27 +158,32 @@ const BottomTabNavigator = createBottomTabNavigator({
   defaultNavigationOptions: ({navigation}) => {
     tabBarIcon: ({
       focused,
-      horizontal,
       tintColor
     }) => {
-      const { routeName } = navigation.state;
-      let IconComponent = Ionicons;
-      let iconName;
-      if (routeName === 'Home') {
-        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        // Sometimes we want to add badges to some icons. 
-        // You can check the implementation below.
-        IconComponent = HomeIconWithBadge; 
-      } else if (routeName === 'Settings') {
-        iconName = `ios-options`;
-      }
+      // const { routeName } = navigation.state;
+      // // let IconComponent = Ionicons;
+      // let iconName;
+      // if (routeName === 'Home') {
+      //   iconName = `ios-car`;
+      //   // Sometimes we want to add badges to some icons. 
+      //   // You can check the implementation below.
+      //   // IconComponent = HomeIconWithBadge; 
+      // } else if (routeName === 'Girl') {
+      //   iconName = `ios-car`;
+      // } 
+      // else {
+      //   iconName = `ios-car`
+      // }
+
+      // iconName = `ios-car`
 
       // You can return any component that you like here!
-      return <IconComponent name={iconName} size={25} color={tintColor} />;    }
+      return <AntDesign name={`minuscircle`} size={25} color={tintColor} />;  
+    }
   },
 
   tabBarOptions: {
-    activeTintColor: '#4d3241',
+    activeTintColor: '#aaa',
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
@@ -184,8 +203,8 @@ const BottomTabNavigator = createBottomTabNavigator({
       backgroundColor: '#fff'
     },
     showIcon:'true',
-    showLabel:'false',
-    inactiveTintColor:'skyblue',
+    showLabel:'true',
+    inactiveTintColor:'#aaa',
     // iconStyle:''
   },
   initialRouteName:'Home',
