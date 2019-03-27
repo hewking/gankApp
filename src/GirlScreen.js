@@ -11,6 +11,8 @@ const REQUEST_URL = 'http://gank.io/api/data/福利/10/1'
 class GirlScreen extends Component {
 
     static navigationOptions = {
+        // header 设置为null 禁止标题栏
+        header:null,
         title:'Home',
         headerStyle:{
             backgroundColor:'#4d3241'
@@ -27,6 +29,9 @@ class GirlScreen extends Component {
             isLoad : false,
             data:[],
         }
+
+        // 如果不bind， this 不是指向外部 component ,navigation 这个值为Null
+        this.bindItem = this.bindItem.bind(this)
     }
 
     render(){
@@ -55,15 +60,16 @@ class GirlScreen extends Component {
         return (<TouchableOpacity style={styles.container} onPress={() => 
             {
                 let {navigate} = this.props.navigation
-                ToastAndroid.show('咋',ToastAndroid.SHORT)
+                // ToastAndroid.show('咋',ToastAndroid.SHORT)
 
-                this.props.navigation.navigate('Detail')
+                // this.props.navigation.navigate('Detail')
 
-                // navigate('ImageDetail',{
-                //     url:item.url,
-                //     desc:item.desc,
-                //     id:item._id,
-                // })
+                navigate('ImageDetail',{
+                    url:item.url,
+                    desc:item.desc,
+                    id:item._id,
+                    title:item.type,
+                })
             }}>
                     <Image source={{uri:item.url} } style={styles.image}/>
             </TouchableOpacity>)
@@ -90,8 +96,9 @@ const styles = StyleSheet.create({
 
     container : {
         flex:1,
-        flexDirection:'column',
+        flexDirection:'row',
         justifyContent:'center',
+        alignItems:'center'
     },
     
     text : {

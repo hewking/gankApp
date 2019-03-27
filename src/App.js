@@ -8,7 +8,8 @@ import {
   StyleSheet,
   IconCo,
   StatusBar,
-  Platform
+  Platform,
+  SafeAreaView,
 } from 'react-native'
 import {
   createStackNavigator,
@@ -16,8 +17,10 @@ import {
   createAppContainer,
   createTabNavigator,
   createMaterialTopTabNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
 } from 'react-navigation'
+
+import {Context} from './context'
 
 // import {BottomTabBar} from 'react-navigation-tabs'
 
@@ -28,13 +31,21 @@ import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Setting from './SettingScreen'
+import { Colors } from './DesignSystem';
 
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
 
 const TAB = createMaterialTopTabNavigator({
-  Home: HomeScreen,
-  GIRL: GirlScreen,
+  Home: {screen:HomeScreen,
+    navigationOptions:{
+      tabBarLabel:'今日最新'
+    }},
+  GIRL: {screen:GirlScreen,
+  navigationOptions:{
+    tabBarLabel:'妹子图'
+  }},
 }, {
+  header:null,
   tabBarOptions: {
     activeTintColor: '#4d3241',
     style: {
@@ -60,10 +71,11 @@ const TAB = createMaterialTopTabNavigator({
 
 const HomeStack = createStackNavigator({
   Home: TAB,
-  Detail:NewsDetail,
   // ImageDetail:ImageDetail
 }, {
   defaultNavigationOptions: {
+    header:null,
+    title:'主页',
     headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: '#4d3241',
@@ -75,12 +87,11 @@ const HomeStack = createStackNavigator({
 })
 
 const GirlStack = createStackNavigator({
-  // Girl: GirlScreen,
-  // ImageDetail:ImageDetail
-  News:NewsDetail
+  Girl: GirlScreen,
+  // News:NewsDetail
 }, {
   defaultNavigationOptions: {
-
+      header:null,
   }
 })
 
@@ -115,7 +126,7 @@ const BottomTabNavigator = createBottomTabNavigator({
   },
   // Girl: GirlStack,
   Girl:{
-    screen:GirlScreen,
+    screen:GirlStack,
     navigationOptions:{
       tabBarLabel:'妹子',
       tabBarIcon:({tintColor,focused}) => (
@@ -176,9 +187,8 @@ const BottomTabNavigator = createBottomTabNavigator({
     showLabel:'false',
     inactiveTintColor:'skyblue',
     // iconStyle:''
-  }
-  ,
-  initialRouteName:'Girl',
+  },
+  initialRouteName:'Home',
   backBehavior:'initialRoute',
   // tabBarComponent:props => {
   //   <TabBarComponent {...props} style={{borderTopColor:'#605f60'}}/>
@@ -199,16 +209,45 @@ const Model = createStackNavigator({
     Drawer:Drawer
 })
 
-export class Navigation extends React.Component {
-  render() {
-    return ([ < StatusBar key = 'statusbar'
-      barStyle = 'light-content' /> ,
-      <Model/>
-    ])
+export default class Navigation extends React.Component {
+  // render() {
+  //   return ([ < StatusBar key = 'statusbar'
+  //     barStyle = 'light-content' /> ,
+  //     <Model/>
+  //   ])
+  // }
+  render(){
+    return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
+    <Context.Provider>
+    <StatusBar barStyle='light-content'></StatusBar>
+        <AppContainer/>
+    </Context.Provider>
+       
+    </SafeAreaView>)
   }
 }
 
-export default createAppContainer(BottomTabNavigator)
+const RootNavigator = createStackNavigator({
+  Main : BottomTabNavigator,
+  ImageDetail:ImageDetail,
+  Detail:NewsDetail,
+},{
+  // 全屏模式
+  mode:'modal',
+  headerMode:'none',
+  defaultNavigationOptions:{
+    header:null,
+    headerStyle:{
+        backgroundColor:'#4d3241'
+    },
+    headerTintColor:'#fff',
+    headerTitleStyle:{
+        fontWeight:'bold'
+    }
+}})
+
+const AppContainer = createAppContainer(RootNavigator)
+// export default createAppContainer(RootNavigator)
 
 // export default createAppContainer(TabNavigator)
 // export default TabNavigator

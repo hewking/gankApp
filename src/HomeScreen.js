@@ -10,6 +10,7 @@ const REQUEST_URL = 'http://gank.io/api/today'
 export default class HomeScreen extends Component {
 
     static navigationOptions = {
+        header:null,
         title:'Home',
         headerStyle:{
             backgroundColor:'#4d3241'
@@ -69,9 +70,9 @@ export default class HomeScreen extends Component {
                 <TouchableOpacity style={styles.touchable}
                 onPress={() => {
                     this.props.navigation.navigate('Detail',{
-                        url:item.url
+                        url:item.url,
+                        title:item.url,
                     })
-                    ToastAndroid.show('detail',ToastAndroid.SHORT)
                 }}>
                 <View style = {styles.container}>
                     <View style={{width:'100%'}}>

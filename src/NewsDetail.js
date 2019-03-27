@@ -5,6 +5,12 @@ import {WebView} from 'react-native-webview'
 
 export default class NewsDetail extends Component{
 
+    static navigationOptions = ({navigation}) => {
+        return {
+            title:navigation.getParam('title','')
+        }
+    }
+
     render(){
 
         const {navigation} = this.props
