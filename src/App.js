@@ -27,6 +27,7 @@ import fontelloConfig from './font/config.json'
 
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
+import GirlScreen2 from './GirlScreen2'
 import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
@@ -46,7 +47,7 @@ const TAB = createMaterialTopTabNavigator({
     navigationOptions:{
       tabBarLabel:'今日最新'
     }},
-  GIRL: {screen:GirlScreen,
+  GIRL: {screen:GirlScreen2,
   navigationOptions:{
     tabBarLabel:'妹子图'
   }},
@@ -93,7 +94,7 @@ const HomeStack = createStackNavigator({
 })
 
 const GirlStack = createStackNavigator({
-  Girl: GirlScreen,
+  Girl: GirlScreen2,
   // News:NewsDetail
 }, {
   defaultNavigationOptions: {

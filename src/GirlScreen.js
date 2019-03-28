@@ -7,6 +7,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import ImageDetail from './ImageDetail'
 import RefreshFooter from './component/refreshList/RefreshFooter';
 import RefreshState from './component/refreshList/RefreshState';
+// import console  from 'console';
 
 const REQUEST_URL = 'http://gank.io/api/data/福利'
 
@@ -35,6 +36,7 @@ class GirlScreen extends Component {
 
         // 如果不bind， this 不是指向外部 component ,navigation 这个值为Null
         this.bindItem = this.bindItem.bind(this)
+        this._renderFooter = this._renderFooter.bind(this)
         this.mPage = 0
     }
 
@@ -47,7 +49,6 @@ class GirlScreen extends Component {
                     keyExtractor={(item) => item._id}
                     ref={(list) => this._flatList = list}
                     onRefresh = {() => {
-                        this._onRefreshEnd()
                         this._refreshData()
                     }}
                     refreshing = {false}
@@ -66,16 +67,19 @@ class GirlScreen extends Component {
     }
 
     _loadMore(){
-        this.fetchData(++this.mPage)
+        if (this.state.footerState === RefreshState.LoadMore) {
+            this.fetchData(++this.mPage)
+        }
     }
 
     _renderFooter(){
-        // let loadState = this.state.footerState
-        // if (typeof loadState === 'undefined') {
-            // loadState = RefreshState.LoadMore
-        // }
+        let loadState = this.state.footerState
+        if (typeof loadState === 'undefined') {
+            loadState = RefreshState.Idle
+        }
+        // console.log('renderfooter')
         return (<RefreshFooter
-            state={RefreshState.LoadMore}
+            state={loadState}
             onRetryLoading={()=> {
                 this._loadMore()
             }}
@@ -116,13 +120,18 @@ class GirlScreen extends Component {
 
     fetchData(page = this.mPage){
         let url = REQUEST_URL + `/${10}/${++page}`
+        console.log(`url ${url}`)
         fetch(url).then((resp) => {
             return resp.json()
         }).then(respData => {
             let results = respData.results
             let footerState = this.state.footerState
-            if (results && results.size < 10) {
+            if (results && results.length < 10) {
                 footerState = RefreshState.NoMore
+            }
+
+            if (results && results.length >= 10) {
+                footerState = RefreshState.LoadMore
             }
 
             if (results === null) {
@@ -133,6 +142,7 @@ class GirlScreen extends Component {
                 footerState = RefreshFooter.Idle
             }
 
+            console.log('state : ' + footerState + ` size : ${results.length}`)
             this.setState({
                 isLoad:true,
                 data:this.state.data.concat(respData.results),
@@ -146,9 +156,9 @@ class GirlScreen extends Component {
         // 第一页
         this.mPage = 0
         this.state.data = []
+        console.log('_refreshData ' + this.mPage)
         this.fetchData(this.mPage)
     }
-
 
 }
 
