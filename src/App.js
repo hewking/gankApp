@@ -34,8 +34,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Setting from './SettingScreen'
 import { Colors } from './DesignSystem';
+import {getAsssetByName} from './Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'
+import StateImage from './widgets/StateImage';
 
 
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
@@ -145,10 +147,16 @@ const BottomTabNavigator = createBottomTabNavigator({
       tabBarLabel:'妹子',
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `minuscircle`
-        return (<AntDesign
-          name= {iconName}
-          size={26}
-          color={tintColor}
+        // return (<AntDesign
+        //   name= {iconName}
+        //   size={26}
+        //   color={tintColor}
+        // />)
+        return (<StateImage
+        focus={focused}
+        focusedIcon={'icon_contacts_current'}
+        normalIcon={'icon_contacts'}
+        style={{width:26,height:26}}
         />)
     }
     }
