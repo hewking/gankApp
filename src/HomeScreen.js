@@ -5,6 +5,8 @@ import {View,StyleSheet,Text,Image,FlatList
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import ToastExample  from './component/ToastExample'
+import * as DesignSystem from './DesignSystem'
+import ImageGrid from './widgets/ImageGrid';
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
@@ -49,6 +51,9 @@ export default class HomeScreen extends Component {
                     data={this.state.data}
                     renderItem={this.bindItem}
                     keyExtractor={item => item._id}// item._id可以唯一标识一个item
+                    onRefresh={this._refreshData}
+                    refreshing={false}
+                    ref = {(list => this.flatList = list)}
                 />
             </View>)
         } else {
@@ -78,7 +83,9 @@ export default class HomeScreen extends Component {
                 }}>
                 <View style = {styles.container}>
                     <View style={{width:'100%'}}>
-                        {item.images && (<Image source={{uri:item.images[0]}} style={{width:'100%'}}/>)}
+                        {console.log(`item.images => ${item.images && item.images}`)}
+                        {/* {item.images && (<Image source={{uri:item.images[0]}} style={{width:'100%',height:200}}/>)} */}
+                        {item.images && (<ImageGrid height={250} width={DesignSystem.ScreenSize.width - 40} images={item.images}/>)}
                         <Text style={styles.text}>{item.desc}</Text>
                         <Text>类型:{item.type}</Text>
                         <View style={{flexDirection:'row'}}>
@@ -95,6 +102,14 @@ export default class HomeScreen extends Component {
     componentDidMount(){
         // 开始加载数据
         this.fetchData()
+    }
+
+    _refreshData = () => {
+
+    }
+
+    _endRefresh() {
+        this.flatList.refreshing = false
     }
 
     fetchData(){
