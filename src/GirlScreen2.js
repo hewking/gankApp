@@ -5,6 +5,7 @@ import RefreshFlatList from './component/refreshList/RefreshFlatList'
 import RefreshState from './component/refreshList/RefreshState';
 
 const REQUEST_URL = 'http://gank.io/api/data/福利'
+const PAGE_SIZE = 10
 
 export default class extends Component {
 
@@ -46,7 +47,7 @@ export default class extends Component {
     }
 
     _bindItem({item}) {
-        console.log('item ' + {...item})
+        // console.log('item ' + {...item})
         return (<TouchableOpacity 
             style = {{flex:1,
                 flexDirection:'row',
@@ -77,15 +78,27 @@ export default class extends Component {
     }
 
     _fetchData(page = this.mPage){
-        let url = REQUEST_URL + `/${10}/${page}`
+        console.log(`fetchData ${page}`)
+        let url = REQUEST_URL + `/${PAGE_SIZE}/${page}`
         fetch(url).then(resp => (resp.json()))
         .then(respJson => {
+            let results = respJson.results
+            let length = results.length
+            // 改变底部状态 调用endRefreshing函数
+            // 如果 length < 10 说明没有更多可以加载了 NO_MORE
+            // lenght >= 10 可以加载
+            let state = RefreshState.Idle
+            if (length >= PAGE_SIZE) {
+                state = RefreshState.LoadMore   
+            } else {
+                state = RefreshState.NoMore
+            }
             this.setState({
                 isLoad : true,
-                data:this.state.data.concat(respJson.results)
+                data:this.state.data.concat(results)
             })
             this.mPage ++
-            this.flatList.endRefreshing()
+            this.flatList.endRefreshing(state)
         }).catch(err => {
             this.flatList.endRefreshing(RefreshState.Failure)
         })
