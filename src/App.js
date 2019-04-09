@@ -132,11 +132,12 @@ const BottomTabNavigator = createBottomTabNavigator({
       tabBarLabel:'主页',
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `infocirlce`
-        return (<AntDesign
-          name= {iconName}
-          size={26}
-          color={tintColor}
-        />)
+        return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_browser_home_current'}
+          normalIcon={'icon_browser_home'}
+          style={{width:26,height:26}}
+          />)
       }
     }
   },
