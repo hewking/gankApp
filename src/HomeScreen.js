@@ -10,6 +10,9 @@ import ImageGrid from './widgets/ImageGrid';
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import Svg from './component/Svg';
+import svgs from './assets/svgs';
+
 const REQUEST_URL = 'http://gank.io/api/today'
 
 export default class HomeScreen extends Component {
@@ -57,7 +60,11 @@ export default class HomeScreen extends Component {
                     refreshing={false}
                     ref = {(list => this.flatList = list)}
                 />
-
+            {
+        //   Object.keys(svgs).map((icon, index) =>
+            <Svg key={`key`} icon={'sao'} size="30" />
+            //  )
+        }
             <TouchableOpacity style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
             onPress={() => {
                 ToastAndroid.show('float action',ToastAndroid.SHORT)

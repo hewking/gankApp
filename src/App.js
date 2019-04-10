@@ -248,8 +248,8 @@ export default class Navigation extends React.Component {
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
-    <StatusBar barStyle='light-content'></StatusBar>
-        <AppContainer/>
+    <StatusBar barStyle='light-content' backgroundColor='#4d3241'></StatusBar>
+      <AppContainer/>
     </Context.Provider>
        
     </SafeAreaView>)
