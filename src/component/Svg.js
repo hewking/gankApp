@@ -5,18 +5,20 @@ import svgs from '../assets/svgs';
 
 export default class Svg extends Component {
   render() {
-    const {
+    let {
       icon,
       color,
       size,
       style,
+      source,
     } = this.props;
-    let svgXmlData = svgs[this.props.icon];
+    icon = 'fendi'
+    let svgXmlData = svgs[icon];
 
-    // if (!svgXmlData) {
-    //   let err_msg = `没有"${this.props.icon}"这个icon`;
-    //   throw new Error(err_msg);
-    // }
+    if (!svgXmlData) {
+      let err_msg = `没有"${this.props.icon}"这个icon`;
+      throw new Error(err_msg);
+    }
     return (
       <SvgUri
         width={size}
@@ -24,6 +26,7 @@ export default class Svg extends Component {
         svgXmlData={svgXmlData}
         fill={color}
         style={style}
+        source={source}
       />
     )
   }
