@@ -6,6 +6,8 @@ const resources = {
     'icon_browser_home' : require('../res/icon_browser_home.png'),
     'icon_contacts_current' : require('../res/icon_contacts_current.png'),
     'icon_contacts' : require('../res/icon_contacts.png'),
+    'icon_setting_normal' : require('../res/icon_setting_normal.png'),
+    'icon_setting_focused':require('../res/icon_setting_focused.png')
 }
 
 export function getAsssetByName(filename) {

@@ -38,6 +38,8 @@ import {getAsssetByName} from './Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
+import SettingScreen from './SettingScreen';
+import ResponderTestScreen from './component/ResponderTestScreen';
 
 
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
@@ -142,24 +144,38 @@ const BottomTabNavigator = createBottomTabNavigator({
     }
   },
   // Girl: GirlStack,
-  Girl:{
-    screen:GirlStack,
-    navigationOptions:{
-      tabBarLabel:'妹子',
-      tabBarIcon:({tintColor,focused}) => {
-        let iconName = `minuscircle`
-        // return (<AntDesign
-        //   name= {iconName}
-        //   size={26}
-        //   color={tintColor}
-        // />)
-        return (<StateImage
-        focus={focused}
-        focusedIcon={'icon_contacts_current'}
-        normalIcon={'icon_contacts'}
-        style={{width:26,height:26}}
-        />)
+    Girl:{
+      screen:GirlStack,
+      navigationOptions:{
+        tabBarLabel:'妹子',
+        tabBarIcon:({tintColor,focused}) => {
+          let iconName = `minuscircle`
+          // return (<AntDesign
+          //   name= {iconName}
+          //   size={26}
+          //   color={tintColor}
+          // />)
+          return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_contacts_current'}
+          normalIcon={'icon_contacts'}
+          style={{width:26,height:26}}
+          />)
+      }
     }
+  },
+  Setting : {
+    screen:SettingScreen,
+    navigationOptions:{
+      tabBarLabel:'设置',
+      tabBarIcon:({tintColor,focused}) => {
+        return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_setting_focused'}
+          normalIcon={'icon_setting_normal'}
+          style={{width:26,height:26}}
+          />)
+      }
     }
   }
 
@@ -260,6 +276,7 @@ const RootNavigator = createStackNavigator({
   Main : BottomTabNavigator,
   ImageDetail:ImageDetail,
   Detail:NewsDetail,
+  Responder : ResponderTestScreen,
 },{
   // 全屏模式
   mode:'modal',

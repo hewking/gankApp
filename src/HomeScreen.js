@@ -65,7 +65,7 @@ export default class HomeScreen extends Component {
             // <Svg key={`key`} icon={'sao'} size="30" />
             //  )
         }
-            <Svg key = 'fendi'  size={30} />
+            {/* <Svg key = 'fendi'  size={30} /> */}
 
             <TouchableOpacity style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
             onPress={() => {

@@ -1,12 +1,32 @@
 import React,{Component} from 'react'
-import {View,Text,StyleSheet} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
+import { Colors } from './DesignSystem';
 
 export default class SettingScreen extends Component {
 
     render(){
-        return (<View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-            <Text>设置页面</Text>
+        return (<View style={styles.container}>
+            <TouchableOpacity style={styles.textContainer} onPress = {() => this.props.navigation.navigate('Responder')}>
+               <Text style={styles.text}>设置页面</Text>
+            </TouchableOpacity>
         </View>)
     }
 
+
 }
+
+const styles = StyleSheet.create({
+    container : {flex:1,justifyContent:'center',alignItems:'center'},
+    text : {
+        paddingTop:10,
+        paddingBottom:10,
+        paddingLeft:15,
+        paddingRight:15,
+        color:Colors.buttonText
+    },
+    textContainer : {
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:Colors.lightBackground
+    }
+})
