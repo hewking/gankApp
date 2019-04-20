@@ -8,28 +8,55 @@ import {
   StyleSheet,
   IconCo,
   StatusBar,
-  Platform
+  Platform,
+  SafeAreaView,
 } from 'react-native'
 import {
   createStackNavigator,
-  createBottomTabNavigator,
+  // createBottomTabNavigator,
   createAppContainer,
   createTabNavigator,
   createMaterialTopTabNavigator,
-  createDrawerNavigator
+  createDrawerNavigator,
 } from 'react-navigation'
-// import Icon from 'react-native-vector-icons/Ionicons';
+
+import {Context} from './context'
+
+import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
+import fontelloConfig from './font/config.json'
+
 import HomeScreen from './HomeScreen'
 import GirlScreen from './GirlScreen'
+import GirlScreen2 from './GirlScreen2'
 import NewsDetail from './NewsDetail'
 import ImageDetail from './ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import Setting from './SettingScreen'
+import { Colors } from './DesignSystem';
+import {getAsssetByName} from './Asset'
+
+import { createIconSetFromFontello } from 'react-native-vector-icons'
+import StateImage from './widgets/StateImage';
+import SettingScreen from './SettingScreen';
+import ResponderTestScreen from './component/ResponderTestScreen';
+
+
+// const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
+
+const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 const TAB = createMaterialTopTabNavigator({
-  Home: HomeScreen,
-  GIRL: GirlScreen,
+  Home: {screen:HomeScreen,
+    navigationOptions:{
+      tabBarLabel:'今日最新'
+    }},
+  GIRL: {screen:GirlScreen2,
+  navigationOptions:{
+    tabBarLabel:'妹子图'
+  }},
 }, {
+  header:null,
   tabBarOptions: {
     activeTintColor: '#4d3241',
     style: {
@@ -55,27 +82,28 @@ const TAB = createMaterialTopTabNavigator({
 
 const HomeStack = createStackNavigator({
   Home: TAB,
-  Detail:NewsDetail,
   // ImageDetail:ImageDetail
 }, {
   defaultNavigationOptions: {
+    header:null,
+    title:'主页',
     headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: '#4d3241',
     },
   },
   navigationOptions: {
-    tabBarLabel: 'Home!',
+    tabBarLabel: '主页',
   }
 })
 
 const GirlStack = createStackNavigator({
-  // Girl: GirlScreen,
-  // ImageDetail:ImageDetail
-  News:NewsDetail
+  Girl: GirlScreen2,
+  // News:NewsDetail
 }, {
   defaultNavigationOptions: {
-
+      header:null,
+      tabBarLabel:'妹子'
   }
 })
 
@@ -94,39 +122,94 @@ const Drawer = createDrawerNavigator({
 //   TabNav : TabNavigator,
 //   Detail:NewsDetail
 // })
-const TabNavigator = createBottomTabNavigator({
-  Home: HomeStack,
+const BottomTabNavigator = createBottomTabNavigator({
+  // tabBarComponent: props =>
+  //     <TabBarComponent
+  //       {...props}
+  //       style={{ borderTopColor: '#605F60' }}
+  //     />,
+  Home: {
+    screen:HomeStack,
+    navigationOptions:{
+      tabBarLabel:'主页',
+      tabBarIcon:({tintColor,focused}) => {
+        let iconName = `infocirlce`
+        return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_browser_home_current'}
+          normalIcon={'icon_browser_home'}
+          style={{width:26,height:26}}
+          />)
+      }
+    }
+  },
   // Girl: GirlStack,
-  Girl:GirlStack
+    Girl:{
+      screen:GirlStack,
+      navigationOptions:{
+        tabBarLabel:'妹子',
+        tabBarIcon:({tintColor,focused}) => {
+          let iconName = `minuscircle`
+          // return (<AntDesign
+          //   name= {iconName}
+          //   size={26}
+          //   color={tintColor}
+          // />)
+          return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_contacts_current'}
+          normalIcon={'icon_contacts'}
+          style={{width:26,height:26}}
+          />)
+      }
+    }
+  },
+  Setting : {
+    screen:SettingScreen,
+    navigationOptions:{
+      tabBarLabel:'设置',
+      tabBarIcon:({tintColor,focused}) => {
+        return (<StateImage
+          focus={focused}
+          focusedIcon={'icon_setting_focused'}
+          normalIcon={'icon_setting_normal'}
+          style={{width:26,height:26}}
+          />)
+      }
+    }
+  }
 
 }, {
   // 自定义底部tab
-  defaultNavigationOptions: ({
-    navigation
-  }) => {
+  defaultNavigationOptions: ({navigation}) => {
     tabBarIcon: ({
       focused,
-      horizontal,
       tintColor
     }) => {
-      const { routeName } = navigation.state;
-      let IconComponent = Ionicons;
-      let iconName;
-      if (routeName === 'Home') {
-        iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-        // Sometimes we want to add badges to some icons. 
-        // You can check the implementation below.
-        IconComponent = HomeIconWithBadge; 
-      } else if (routeName === 'Settings') {
-        iconName = `ios-options`;
-      }
+      // const { routeName } = navigation.state;
+      // // let IconComponent = Ionicons;
+      // let iconName;
+      // if (routeName === 'Home') {
+      //   iconName = `ios-car`;
+      //   // Sometimes we want to add badges to some icons. 
+      //   // You can check the implementation below.
+      //   // IconComponent = HomeIconWithBadge; 
+      // } else if (routeName === 'Girl') {
+      //   iconName = `ios-car`;
+      // } 
+      // else {
+      //   iconName = `ios-car`
+      // }
+
+      // iconName = `ios-car`
 
       // You can return any component that you like here!
-      return <IconComponent name={iconName} size={25} color={tintColor} />;    }
+      return <AntDesign name={`minuscircle`} size={25} color={tintColor} />;  
+    }
   },
 
   tabBarOptions: {
-    activeTintColor: '#4d3241',
+    activeTintColor: '#aaa',
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
@@ -145,7 +228,16 @@ const TabNavigator = createBottomTabNavigator({
     indicatorStyle: {
       backgroundColor: '#fff'
     },
-  }
+    showIcon:'true',
+    showLabel:'true',
+    inactiveTintColor:'#aaa',
+    // iconStyle:''
+  },
+  initialRouteName:'Home',
+  backBehavior:'initialRoute',
+  // tabBarComponent:props => {
+  //   <TabBarComponent {...props} style={{borderTopColor:'#605f60'}}/>
+  // }
 })
 
 const styles = StyleSheet.create({
@@ -162,16 +254,46 @@ const Model = createStackNavigator({
     Drawer:Drawer
 })
 
-export class Navigation extends React.Component {
-  render() {
-    return ([ < StatusBar key = 'statusbar'
-      barStyle = 'light-content' /> ,
-      <Model/>
-    ])
+export default class Navigation extends React.Component {
+  // render() {
+  //   return ([ < StatusBar key = 'statusbar'
+  //     barStyle = 'light-content' /> ,
+  //     <Model/>
+  //   ])
+  // }
+  render(){
+    return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
+    <Context.Provider>
+    <StatusBar barStyle='light-content' backgroundColor='#4d3241'></StatusBar>
+      <AppContainer/>
+    </Context.Provider>
+       
+    </SafeAreaView>)
   }
 }
 
-export default createAppContainer(Model)
+const RootNavigator = createStackNavigator({
+  Main : BottomTabNavigator,
+  ImageDetail:ImageDetail,
+  Detail:NewsDetail,
+  Responder : ResponderTestScreen,
+},{
+  // 全屏模式
+  mode:'modal',
+  headerMode:'none',
+  defaultNavigationOptions:{
+    header:null,
+    headerStyle:{
+        backgroundColor:'#4d3241'
+    },
+    headerTintColor:'#fff',
+    headerTitleStyle:{
+        fontWeight:'bold'
+    }
+}})
+
+const AppContainer = createAppContainer(RootNavigator)
+// export default createAppContainer(RootNavigator)
 
 // export default createAppContainer(TabNavigator)
 // export default TabNavigator
