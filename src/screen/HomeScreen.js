@@ -4,14 +4,14 @@ import {View,StyleSheet,Text,Image,FlatList
     ,ProgressBarAndroid,SectionList,StatusBar,ToastAndroid,TouchableOpacity} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
-import ToastExample  from './component/ToastExample'
-import * as DesignSystem from './DesignSystem'
-import ImageGrid from './widgets/ImageGrid';
+import ToastExample  from '../component/ToastExample'
+import * as DesignSystem from '../widgets/DesignSystem'
+import ImageGrid from '../widgets/ImageGrid';
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Svg from './component/Svg';
-import svgs from './assets/svgs';
+import Svg from '../component/Svg';
+import svgs from '../assets/svgs';
 
 const REQUEST_URL = 'http://gank.io/api/today'
 

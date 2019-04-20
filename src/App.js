@@ -25,21 +25,21 @@ import {Context} from './context'
 import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
 import fontelloConfig from './font/config.json'
 
-import HomeScreen from './HomeScreen'
+import HomeScreen from './screen/HomeScreen'
 import GirlScreen from './GirlScreen'
 import GirlScreen2 from './GirlScreen2'
-import NewsDetail from './NewsDetail'
-import ImageDetail from './ImageDetail'
+import NewsDetail from './screen/NewsDetail'
+import ImageDetail from './screen/ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import Setting from './SettingScreen'
-import { Colors } from './DesignSystem';
-import {getAsssetByName} from './Asset'
+import Setting from './screen/SettingScreen'
+import { Colors } from './widgets/DesignSystem';
+import {getAsssetByName} from './widgets/Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
-import SettingScreen from './SettingScreen';
-import ResponderTestScreen from './component/ResponderTestScreen';
+import SettingScreen from './screen/SettingScreen';
+import ResponderTestScreen from './screen/ResponderTestScreen';
 
 
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
@@ -49,7 +49,7 @@ const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 const TAB = createMaterialTopTabNavigator({
   Home: {screen:HomeScreen,
     navigationOptions:{
-      tabBarLabel:'今日最新'
+      tabBarLabel:'最新'
     }},
   GIRL: {screen:GirlScreen2,
   navigationOptions:{
@@ -86,14 +86,14 @@ const HomeStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     header:null,
-    title:'主页',
+    title:'最新',
     headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: '#4d3241',
     },
   },
   navigationOptions: {
-    tabBarLabel: '主页',
+    tabBarLabel: '最新',
   }
 })
 
@@ -131,7 +131,7 @@ const BottomTabNavigator = createBottomTabNavigator({
   Home: {
     screen:HomeStack,
     navigationOptions:{
-      tabBarLabel:'主页',
+      tabBarLabel:'最新',
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `infocirlce`
         return (<StateImage

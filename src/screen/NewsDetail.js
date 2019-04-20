@@ -2,7 +2,7 @@ import React,{Component} from 'react'
 import {View,Button,Text,StyleSheet,TouchableOpacity
 } from 'react-native'
 import {WebView} from 'react-native-webview'
-import TitleBar from './component/TitleBar';
+import TitleBar from '../widgets/TitleBar';
 
 export default class NewsDetail extends Component{
 

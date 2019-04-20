@@ -3,7 +3,7 @@ import {View
     ,Text
     ,Image
     ,StyleSheet} from 'react-native'
-import TitleBar from './component/TitleBar';
+import TitleBar from '../widgets/TitleBar';
 
 export default class ImageDetail extends Component {
 
