@@ -26,15 +26,14 @@ import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
 import fontelloConfig from './font/config.json'
 
 import HomeScreen from './screen/HomeScreen'
-import GirlScreen from './GirlScreen'
-import GirlScreen2 from './GirlScreen2'
+import GirlScreen2 from './screen/GirlScreen2'
 import NewsDetail from './screen/NewsDetail'
 import ImageDetail from './screen/ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Setting from './screen/SettingScreen'
 import { Colors } from './widgets/DesignSystem';
-import {getAsssetByName} from './widgets/Asset'
+import {getAsssetByName} from './util/Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';

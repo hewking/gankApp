@@ -17,6 +17,7 @@ export const ButtonSize = {
 }
 
 export const Colors = {
+
   background: '#191A2A',
   darkerBackground: '#10101A',
   lightBackground: '#212132',
@@ -47,7 +48,15 @@ export const Colors = {
     primaryText: '255,255,255',
     secondaryText: '102,104,143',
     summaryText: '155,155,180'
-  }
+  },
+  //#ffffff白色   #89a0ae灰色   #4ab9f0 蓝色 ，三种text颜色
+  whiteLabel : '#ffffff',
+  greyLabel : '#89a0ae',
+  blueLabel : '#4ab9f0',
+  colorPrimary : '#222937' ,
+  colorPrimaryDark : '#222937',
+  colorAccent : '#448aec',
+  chatBgColor : '#2d3549'
 }
 
 const { width, height } = Dimensions.get('window')

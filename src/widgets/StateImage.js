@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
 import {View,Image,TouchableWithoutFeedback} from 'react-native'
-import {getAsssetByName} from './Asset'
+import {getAsssetByName} from '../util/Asset'
 
 export default class extends Component {
 

@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
 import {View,Text,Button,Image,StyleSheet,TouchableOpacity,ActivityIndicator} from 'react-native'
 import PropTypes  from 'prop-types'
-import RefreshFlatList from './component/refreshList/RefreshFlatList'
-import RefreshState from './component/refreshList/RefreshState';
+import RefreshFlatList from '../component/refreshList/RefreshFlatList'
+import RefreshState from '../component/refreshList/RefreshState';
 
 const REQUEST_URL = 'http://gank.io/api/data/福利'
 const PAGE_SIZE = 10
