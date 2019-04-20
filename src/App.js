@@ -39,7 +39,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
 import SettingScreen from './screen/SettingScreen';
 import ResponderTestScreen from './screen/ResponderTestScreen';
-
+import I18n from './res/i18n/i18n'
 
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
 
@@ -85,7 +85,7 @@ const HomeStack = createStackNavigator({
 }, {
   defaultNavigationOptions: {
     header:null,
-    title:'最新',
+    title:I18n.t('latest_today'),
     headerTintColor: '#fff',
     headerStyle: {
       backgroundColor: '#4d3241',

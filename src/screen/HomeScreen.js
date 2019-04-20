@@ -11,7 +11,7 @@ import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Svg from '../component/Svg';
-import svgs from '../assets/svgs';
+import svgs from '../res/assets/svgs';
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
