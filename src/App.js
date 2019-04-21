@@ -46,9 +46,9 @@ import SvgStateImage from './widgets/SvgStateImage'
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 const TAB = createMaterialTopTabNavigator({
-  Home: {screen:HomeScreen,
+  ALL: {screen:HomeScreen,
     navigationOptions:{
-      tabBarLabel:'最新'
+      tabBarLabel:'全部'
     }},
   GIRL: {screen:GirlScreen2,
   navigationOptions:{
@@ -88,9 +88,9 @@ const TAB = createMaterialTopTabNavigator({
 })
 
 const CategoryStack = createStackNavigator({
-  Home: TAB,
-  // ImageDetail:ImageDetail
-}, {
+  Main: TAB,
+}, 
+{
   defaultNavigationOptions: {
     header:null,
     title:I18n.t('latest_today'),
@@ -102,11 +102,11 @@ const CategoryStack = createStackNavigator({
   navigationOptions: {
     tabBarLabel: '最新',
   }
-})
+}
+)
 
 const GirlStack = createStackNavigator({
   Girl: GirlScreen2,
-  // News:NewsDetail
 }, {
   defaultNavigationOptions: {
       header:null,
@@ -115,7 +115,7 @@ const GirlStack = createStackNavigator({
 })
 
 const HomeStack = createStackNavigator({
-  Latest : HomeScreen
+  Home : HomeScreen
 },{
   defaultNavigationOptions:{
     header:null,
@@ -135,7 +135,7 @@ const Drawer = createDrawerNavigator({
 
 const BottomTabNavigator = createBottomTabNavigator({
   Home: {
-    screen:HomeStack,
+    screen:HomeScreen,
     navigationOptions:{
       tabBarLabel:I18n.t('latest_today'),
       tabBarIcon:({tintColor,focused}) => {
@@ -145,13 +145,13 @@ const BottomTabNavigator = createBottomTabNavigator({
           focus={focused}
           focusedIcon={'icon_latest_selected'}
           normalIcon={'icon_latest_unselected'}
-          size={26}
+          size={25}
           />)
       }
     }
   },
     Category:{
-      screen:CategoryStack,
+      screen:TAB,
       navigationOptions:{
         tabBarLabel:'分类',
         tabBarIcon:({tintColor,focused}) => {
@@ -165,10 +165,24 @@ const BottomTabNavigator = createBottomTabNavigator({
           focus={focused}
           focusedIcon={'icon_category_selected'}
           normalIcon={'icon_category_unselected'}
-          size={26}
+          size={25}
           />)
       }
     }
+  },
+  Girl : {
+    screen:GirlScreen2,
+    navigationOptions:{
+      tabBarLabel:'妹子',
+      tabBarIcon:({tintColor,focused}) => {
+        return (<SvgStateImage
+        focus={focused}
+        focusedIcon={'icon_girl_selected'}
+        normalIcon={'icon_girl_unselected'}
+        size={25}
+        />)
+    }
+  }
   },
   Setting : {
     screen:SettingScreen,
@@ -179,7 +193,7 @@ const BottomTabNavigator = createBottomTabNavigator({
           focus={focused}
           focusedIcon={'icon_settings_selected'}
           normalIcon={'icon_settings_unselected'}
-          size={26}
+          size={25}
           />)
       }
     }
