@@ -32,7 +32,7 @@ import ImageDetail from './screen/ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Setting from './screen/SettingScreen'
-import { Colors } from './widgets/DesignSystem';
+import { Colors } from './util/DesignSystem';
 import {getAsssetByName} from './util/Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'

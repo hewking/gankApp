@@ -3,7 +3,7 @@
  */
 import React,{Component} from 'react'
 import {View,StyleSheet,Image,Platform,Text,TouchableOpacity} from 'react-native'
-import * as DesignSystem from './DesignSystem'
+import * as DesignSystem from '../util/DesignSystem'
 
 export default class extends Component {
 

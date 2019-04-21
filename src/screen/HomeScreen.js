@@ -1,17 +1,23 @@
 
 import React,{Component} from 'react'
 import {View,StyleSheet,Text,Image,FlatList
-    ,ProgressBarAndroid,SectionList,StatusBar,ToastAndroid,TouchableOpacity} from 'react-native'
+    ,ProgressBarAndroid
+    ,SectionList
+    ,StatusBar
+    ,ToastAndroid
+    ,TouchableOpacity
+    ,TouchableWithoutFeedback} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import ToastExample  from '../component/ToastExample'
-import * as DesignSystem from '../widgets/DesignSystem'
+import * as DesignSystem from '../util/DesignSystem'
 import ImageGrid from '../widgets/ImageGrid';
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Svg from '../component/Svg';
 import svgs from '../res/assets/svgs';
+import LoadingView from '../widgets/LoadingView';
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
@@ -42,14 +48,8 @@ export default class HomeScreen extends Component {
     }
 
     render(){
-
         status = this.state.isLoad
         if (status) {
-            // 动态创建category
-            // const topTabNavigator = createMaterialTopTabNavigator({
-                
-            // })
-
             return (<View style={styles.container}>
                 <FlatList
                     style={styles.list}
@@ -61,13 +61,9 @@ export default class HomeScreen extends Component {
                     ref = {(list => this.flatList = list)}
                 />
             {
-        //   Object.keys(svgs).map((icon, index) =>
-            // <Svg key={`key`} icon={'sao'} size="30" />
-            //  )
         }
-            {/* <Svg key = 'fendi'  size={30} /> */}
 
-            <TouchableOpacity style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
+            <TouchableWithoutFeedback style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
             onPress={() => {
                 ToastAndroid.show('float action',ToastAndroid.SHORT)
             }}>
@@ -83,7 +79,7 @@ export default class HomeScreen extends Component {
                         <Icon name="md-done-all" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                     </ActionButton>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             </View>)
         } else {
             return this.rendeLoadingView()
@@ -92,11 +88,7 @@ export default class HomeScreen extends Component {
     }
 
     rendeLoadingView(){
-        return (<View style={styles.container}>
-            <Text>
-                正在加载...
-            </Text>
-        </View>)
+        return (<LoadingView/>)
     }
 
     bindItem({item}) {
@@ -112,7 +104,6 @@ export default class HomeScreen extends Component {
                 <View style = {styles.container}>
                     <View style={{width:'100%'}}>
                         {console.log(`item.images => ${item.images && item.images}`)}
-                        {/* {item.images && (<Image source={{uri:item.images[0]}} style={{width:'100%',height:200}}/>)} */}
                         {item.images && (<ImageGrid height={250} width={DesignSystem.ScreenSize.width - 40} images={item.images}/>)}
                         <Text style={styles.text}>{item.desc}</Text>
                         <Text>类型:{item.type}</Text>

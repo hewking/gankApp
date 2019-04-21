@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
-import { Colors } from '../widgets/DesignSystem';
+import { Colors } from '../util/DesignSystem';
 
 export default class SettingScreen extends Component {
 
