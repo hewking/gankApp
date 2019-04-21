@@ -21,6 +21,7 @@ import svgs from '../res/assets/svgs';
 import LoadingView from '../widgets/LoadingView';
 import CategoryEntity from '../entitys/CategoryEntity';
 import * as L from '../util/L'
+import GirlEntity from '../entitys/GirlEntity';
 
 
 const REQUEST_URL = 'http://gank.io/api/today'
@@ -102,13 +103,13 @@ export default class HomeScreen extends Component {
     }
 
     bindItem({item}) {
-        // L.d('item type : ' + item.itemType)
+        L.d('bindItem item type : ' + item.itemType + ' url : ' + item.url)
            if (item.itemType === Types.Item) {
                 return this._renderItemView(item)
            } else if (item.itemType === Types.Category) {
                return this._renderCategory(item)
            } else if (item.itemType === Types.Girl) {
-                return this._renderGirl()
+                return this._renderGirl(item)
            } else {
                return null
            }
@@ -120,7 +121,7 @@ export default class HomeScreen extends Component {
                 // ToastExample.show('native',ToastExample.SHORT)
                 this.props.navigation.navigate('Detail',{
                     url:item.url,
-                    title:item.url,
+                    title:item.desc,
                 })
             }}>
             <View style = {styles.container}>
@@ -143,7 +144,7 @@ export default class HomeScreen extends Component {
     }
 
     _renderGirl = (item) => {
-        return <Image style={styles.girl} source={url = item.url}/>
+        return <Image style={styles.girl} source={{uri:item.url}}/>
     }
 
     componentDidMount(){
@@ -167,6 +168,7 @@ export default class HomeScreen extends Component {
              // 2. 一次添加分类及分类下的数据 到data
              // 3.以上三种都需要标注不同的type 以便renderItem的时候不同的ui
              const datas = []
+
              let girls = respData.results['福利']
              girls.forEach((item) => {
                  item.itemType = Types.Girl
@@ -174,28 +176,22 @@ export default class HomeScreen extends Component {
             
              if (girls.length > 0) {
                 datas.push(girls[0])
-                L.d('girls[0] item type : ' + girls[0].itemType)
              }
-             let categorys = respData.category.splice(0,4)
+             let categorys = respData.category
              categorys.forEach((category) => {
                 L.d('category : ' + category)
-                // if (category !== '福利') {
+                if (category !== '福利') {
                         datas.push(new CategoryEntity(category,Types.Category))
                         respData.results[category].forEach((item) => {
                             item.itemType = Types.Item
                             datas.push(item)
                          })
-                // }
+                }
             })
 
             this.setState({
                 isLoad:true,
                 data:this.state.data.concat(datas),
-                // category:this.state.category.concat(respData.category)
-            })
-
-            this.state.data.forEach(item => {
-                L.d('state date itemtype : ' + item.itemType + ' url : ' + item.url)
             })
         })
     }
@@ -246,7 +242,8 @@ const styles = StyleSheet.create({
         margin:8,
       },
       girl : {
-          width:'100%'
+          width:'100%',
+          height:400,
       }
 
 })

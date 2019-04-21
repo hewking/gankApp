@@ -271,7 +271,7 @@ const RootNavigator = createStackNavigator({
     //       shadowOpacity:0,// remove shadow on iOS
     //     }
     // },
-    headerTitle:'Gank.io',
+    title:'Gank.io',
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,
