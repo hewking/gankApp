@@ -103,7 +103,7 @@ export default class HomeScreen extends Component {
     }
 
     bindItem({item}) {
-        L.d('bindItem item type : ' + item.itemType + ' url : ' + item.url)
+        // L.d('bindItem item type : ' + item.itemType + ' url : ' + item.url)
            if (item.itemType === Types.Item) {
                 return this._renderItemView(item)
            } else if (item.itemType === Types.Category) {
@@ -179,7 +179,7 @@ export default class HomeScreen extends Component {
              }
              let categorys = respData.category
              categorys.forEach((category) => {
-                L.d('category : ' + category)
+                // L.d('category : ' + category)
                 if (category !== '福利') {
                         datas.push(new CategoryEntity(category,Types.Category))
                         respData.results[category].forEach((item) => {

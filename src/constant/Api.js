@@ -12,3 +12,8 @@ const SEARCH_URL = `${BASE_URL}/search/query/listview/category`
  * http://gank.io/api/data/all/20/2
  */
 const CATEGORY_URL = `${BASE_URL}/data`
+
+module.exports = {
+    CATEGORY_URL,
+    SEARCH_URL,   
+}

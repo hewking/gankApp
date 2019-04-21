@@ -38,15 +38,15 @@ import {getAsssetByName} from './util/Asset'
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
 import SettingScreen from './screen/SettingScreen';
+import CategoryScreen from './screen/CategoryScreen'
 import ResponderTestScreen from './screen/ResponderTestScreen';
 import I18n from './res/i18n/i18n'
 import SvgStateImage from './widgets/SvgStateImage'
-// const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 const TAB = createMaterialTopTabNavigator({
-  ALL: {screen:HomeScreen,
+  ALL: {screen:CategoryScreen,
     navigationOptions:{
       tabBarLabel:'全部'
     }},
@@ -87,51 +87,16 @@ const TAB = createMaterialTopTabNavigator({
   }
 })
 
-const CategoryStack = createStackNavigator({
-  Main: TAB,
-}, 
-{
-  defaultNavigationOptions: {
-    header:null,
-    title:I18n.t('latest_today'),
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: Colors.colorPrimary,
-    },
-  },
-  navigationOptions: {
-    tabBarLabel: '最新',
-  }
-}
-)
 
-const GirlStack = createStackNavigator({
-  Girl: GirlScreen2,
-}, {
-  defaultNavigationOptions: {
-      header:null,
-      tabBarLabel:'妹子'
-  }
-})
-
-const HomeStack = createStackNavigator({
-  Home : HomeScreen
-},{
-  defaultNavigationOptions:{
-    header:null,
-    tabBarLabel:'今日最新'
-  }
-})
-
-const Drawer = createDrawerNavigator({
-  HOME:CategoryStack,
-  Setting:Setting
-},{
-  navigationOptions:{
-      drawerLockMode:'locked-closed',
-  },
-  backBehavior:'none'
-})
+// const Drawer = createDrawerNavigator({
+//   HOME:CategoryStack,
+//   Setting:Setting
+// },{
+//   navigationOptions:{
+//       drawerLockMode:'locked-closed',
+//   },
+//   backBehavior:'none'
+// })
 
 const BottomTabNavigator = createBottomTabNavigator({
   Home: {
