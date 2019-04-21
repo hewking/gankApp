@@ -12,7 +12,6 @@ export default class Svg extends Component {
       style,
       source,
     } = this.props;
-    icon = 'fendi'
     let svgXmlData = svgs[icon];
 
     if (!svgXmlData) {

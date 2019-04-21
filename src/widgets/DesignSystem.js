@@ -53,10 +53,12 @@ export const Colors = {
   whiteLabel : '#ffffff',
   greyLabel : '#89a0ae',
   blueLabel : '#4ab9f0',
-  colorPrimary : '#222937' ,
-  colorPrimaryDark : '#222937',
+  colorPrimary : '#607D8B' ,
+  colorPrimaryDark : '#607D8B',
   colorAccent : '#448aec',
-  chatBgColor : '#2d3549'
+  chatBgColor : '#2d3549',
+  indicatorColor : '#DDBB87',
+  darkLabel : '#999999'
 }
 
 const { width, height } = Dimensions.get('window')

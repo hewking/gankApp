@@ -40,7 +40,7 @@ import StateImage from './widgets/StateImage';
 import SettingScreen from './screen/SettingScreen';
 import ResponderTestScreen from './screen/ResponderTestScreen';
 import I18n from './res/i18n/i18n'
-
+import SvgStateImage from './widgets/SvgStateImage'
 // const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
@@ -57,29 +57,37 @@ const TAB = createMaterialTopTabNavigator({
 }, {
   header:null,
   tabBarOptions: {
-    activeTintColor: '#4d3241',
+    activeTintColor: Colors.darkLabel,
+    inactiveTintColor:Colors.colorPrimary,
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
-        android: '#4d3241'
+        android: Colors.whiteLabel
       }),
       borderTopColor: 'transparent',
       borderTopWidth: 0,
-      elevation: 0
+      elevation: 4,
     },
     labelStyle: {
       color: Platform.select({
-        ios: null,
-        android: '#fff'
+        ios: Colors.greyLabel,
+        android: Colors.greyLabel,
       })
     },
+    // scrollEnabled:true,
+    tabStyle : {
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+    },
     indicatorStyle: {
-      backgroundColor: '#fff'
+      backgroundColor: Colors.indicatorColor,
+      width:40,
     },
   }
 })
 
-const HomeStack = createStackNavigator({
+const CategoryStack = createStackNavigator({
   Home: TAB,
   // ImageDetail:ImageDetail
 }, {
@@ -88,7 +96,7 @@ const HomeStack = createStackNavigator({
     title:I18n.t('latest_today'),
     headerTintColor: '#fff',
     headerStyle: {
-      backgroundColor: '#4d3241',
+      backgroundColor: Colors.colorPrimary,
     },
   },
   navigationOptions: {
@@ -106,8 +114,17 @@ const GirlStack = createStackNavigator({
   }
 })
 
+const HomeStack = createStackNavigator({
+  Latest : HomeScreen
+},{
+  defaultNavigationOptions:{
+    header:null,
+    tabBarLabel:'今日最新'
+  }
+})
+
 const Drawer = createDrawerNavigator({
-  HOME:HomeStack,
+  HOME:CategoryStack,
   Setting:Setting
 },{
   navigationOptions:{
@@ -116,37 +133,27 @@ const Drawer = createDrawerNavigator({
   backBehavior:'none'
 })
 
-// root stack
-// const RootStack = createStackNavigator({
-//   TabNav : TabNavigator,
-//   Detail:NewsDetail
-// })
 const BottomTabNavigator = createBottomTabNavigator({
-  // tabBarComponent: props =>
-  //     <TabBarComponent
-  //       {...props}
-  //       style={{ borderTopColor: '#605F60' }}
-  //     />,
   Home: {
     screen:HomeStack,
     navigationOptions:{
-      tabBarLabel:'最新',
+      tabBarLabel:I18n.t('latest_today'),
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `infocirlce`
-        return (<StateImage
+        return (<SvgStateImage
+          key={'latest'}
           focus={focused}
-          focusedIcon={'icon_browser_home_current'}
-          normalIcon={'icon_browser_home'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_latest_selected'}
+          normalIcon={'icon_latest_unselected'}
+          size={26}
           />)
       }
     }
   },
-  // Girl: GirlStack,
-    Girl:{
-      screen:GirlStack,
+    Category:{
+      screen:CategoryStack,
       navigationOptions:{
-        tabBarLabel:'妹子',
+        tabBarLabel:'分类',
         tabBarIcon:({tintColor,focused}) => {
           let iconName = `minuscircle`
           // return (<AntDesign
@@ -154,11 +161,11 @@ const BottomTabNavigator = createBottomTabNavigator({
           //   size={26}
           //   color={tintColor}
           // />)
-          return (<StateImage
+          return (<SvgStateImage
           focus={focused}
-          focusedIcon={'icon_contacts_current'}
-          normalIcon={'icon_contacts'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_category_selected'}
+          normalIcon={'icon_category_unselected'}
+          size={26}
           />)
       }
     }
@@ -168,11 +175,11 @@ const BottomTabNavigator = createBottomTabNavigator({
     navigationOptions:{
       tabBarLabel:'设置',
       tabBarIcon:({tintColor,focused}) => {
-        return (<StateImage
+        return (<SvgStateImage
           focus={focused}
-          focusedIcon={'icon_setting_focused'}
-          normalIcon={'icon_setting_normal'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_settings_selected'}
+          normalIcon={'icon_settings_unselected'}
+          size={26}
           />)
       }
     }
@@ -208,20 +215,21 @@ const BottomTabNavigator = createBottomTabNavigator({
   },
 
   tabBarOptions: {
-    activeTintColor: '#aaa',
+    activeTintColor: Colors.greyLabel,
+    inactiveTintColor:'#aaa',
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
-        android: '#4d3241'
+        android: Colors.whiteLabel
       }),
       borderTopColor: 'transparent',
       borderTopWidth: 0,
-      elevation: 0
+      elevation: 4
     },
     labelStyle: {
       color: Platform.select({
         ios: null,
-        android: '#fff'
+        android: Colors.greyLabel
       })
     },
     indicatorStyle: {
@@ -229,41 +237,17 @@ const BottomTabNavigator = createBottomTabNavigator({
     },
     showIcon:'true',
     showLabel:'true',
-    inactiveTintColor:'#aaa',
-    // iconStyle:''
   },
   initialRouteName:'Home',
-  backBehavior:'initialRoute',
-  // tabBarComponent:props => {
-  //   <TabBarComponent {...props} style={{borderTopColor:'#605f60'}}/>
-  // }
-})
+  // backBehavior:'initialRoute',
 
-const styles = StyleSheet.create({
-  container: {
-
-  }
-})
-
-// const Container = createAppContainer(Drawer)
-
-// export default Container
-
-const Model = createStackNavigator({
-    Drawer:Drawer
 })
 
 export default class Navigation extends React.Component {
-  // render() {
-  //   return ([ < StatusBar key = 'statusbar'
-  //     barStyle = 'light-content' /> ,
-  //     <Model/>
-  //   ])
-  // }
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
-    <StatusBar barStyle='light-content' backgroundColor='#4d3241'></StatusBar>
+    <StatusBar barStyle='light-content' backgroundColor={Colors.colorPrimary}></StatusBar>
       <AppContainer/>
     </Context.Provider>
        
@@ -278,14 +262,22 @@ const RootNavigator = createStackNavigator({
   Responder : ResponderTestScreen,
 },{
   // 全屏模式
-  mode:'modal',
-  headerMode:'none',
+  mode:'card',
+  headerMode:'screen',
   defaultNavigationOptions:{
-    header:null,
+    // header:{
+    //     style:{
+    //       // elevation:0,// remove shadow on android
+    //       shadowOpacity:0,// remove shadow on iOS
+    //     }
+    // },
+    headerTitle:'Gank.io',
     headerStyle:{
-        backgroundColor:'#4d3241'
+        backgroundColor:Colors.colorPrimary,
+        shadowOpacity:0,
+        elevation:0,
     },
-    headerTintColor:'#fff',
+    headerTintColor:Colors.whiteLabel,
     headerTitleStyle:{
         fontWeight:'bold'
     }
