@@ -17,7 +17,7 @@ export default class extends Component{
           tabs : ['all','Android','iOS','拓展资源','前端','休息视频']
         }
         this.categoryList = []
-        this.handleChangeTab.bind(this)
+        this.handleChangeTab = this.handleChangeTab.bind(this)
     }
 
     render(){
@@ -37,6 +37,8 @@ export default class extends Component{
                 tabLabel={tabs[i]}
                 category = {tab}
                 key={i}
+                // props包括navigation 传递
+                {...this.props}
               />;
             })}
           </ScrollableTabView>)

@@ -10,6 +10,7 @@ import LoadingView from '../widgets/LoadingView';
 import { Colors } from '../util/DesignSystem';
 import * as L from '../util/L'
 import * as T from '../util/T'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const PAGE_SIZE = 10
 
@@ -24,9 +25,12 @@ export default class extends Component {
 
         this.mPage = 1
         this.category = this.props.category
+
+        this._bindItem = this._bindItem.bind(this)
     }
 
     render(){
+        L.d('category render props ' + this.props)
         if (this.state.isLoad) {
             return (<RefreshFlatList
                 styles={styles.container}
@@ -92,13 +96,19 @@ export default class extends Component {
     }
 
     _bindItem({item}) {
-        return (<View style={styles.item}>
+        return (<TouchableWithoutFeedback style={styles.item}  onPress={() => {
+            L.d('catregory navigation ' + this.props)
+            this.props.navigation.navigate('Detail',{
+                url:item.url,
+                title:item.desc,
+            })
+        }}>
             <Text style={styles.text}>{item.desc}}</Text>
             <View style={{flexDirection:'row'}}>
                 <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
                 <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
             </View>
-        </View>)
+        </TouchableWithoutFeedback>)
     }
 
     onEnter(){
