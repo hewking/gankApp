@@ -96,17 +96,19 @@ export default class extends Component {
     }
 
     _bindItem({item}) {
-        return (<TouchableWithoutFeedback style={styles.item}  onPress={() => {
+        return (<TouchableWithoutFeedback   onPress={() => {
             L.d('catregory navigation ' + this.props)
             this.props.navigation.navigate('Detail',{
                 url:item.url,
                 title:item.desc,
             })
         }}>
-            <Text style={styles.text}>{item.desc}}</Text>
-            <View style={{flexDirection:'row'}}>
-                <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
-                <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
+            <View style={styles.item}>
+                <Text style={[styles.text,{fontWeight:'bold'}]}>{item.desc}}</Text>
+                <View style={{flexDirection:'row'}}>
+                    <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
+                    <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
+                </View>
             </View>
         </TouchableWithoutFeedback>)
     }
@@ -124,21 +126,23 @@ export default class extends Component {
 const styles = StyleSheet.create({
     container : {
         flex:1,
-        flexDirection:'column'
+        flexDirection:'column',
+        backgroundColor:Colors.background2,
     },
     item:{
-        margin:8,
+        marginHorizontal:8,
+        marginTop:8,
         borderRadius:3,
         backgroundColor:Colors.whiteLabel,
         flexDirection:'column',
-        margin:8,
-        width:'100%',
+        borderWidth:1,
+        borderColor:Colors.shadowBackground
     },
     text : {
         fontSize : 16,
         padding : 8,
         fontStyle:'normal',
         width:'100%',
-        color:Colors.greyLabel,
+        color:Colors.mainTextLabel2,
     }
 })

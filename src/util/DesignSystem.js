@@ -59,7 +59,10 @@ export const Colors = {
   chatBgColor : '#2d3549',
   indicatorColor : '#DDBB87',
   darkLabel : '#999999',
-  mainTextLabel : '#666666'
+  mainTextLabel : '#666666',
+  background2 : '#EEEEEE',
+  mainTextLabel2 : '#37474F',
+  shadowBackground : '#CACACA'
 }
 
 const { width, height } = Dimensions.get('window')
