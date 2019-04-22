@@ -25,31 +25,30 @@ import {Context} from './context'
 import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
 import fontelloConfig from './font/config.json'
 
-import HomeScreen from './HomeScreen'
-import GirlScreen from './GirlScreen'
-import GirlScreen2 from './GirlScreen2'
-import NewsDetail from './NewsDetail'
-import ImageDetail from './ImageDetail'
+import HomeScreen from './screen/HomeScreen'
+import GirlScreen2 from './screen/GirlScreen2'
+import NewsDetail from './screen/NewsDetail'
+import ImageDetail from './screen/ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import Setting from './SettingScreen'
-import { Colors } from './DesignSystem';
-import {getAsssetByName} from './Asset'
+import Setting from './screen/SettingScreen'
+import { Colors } from './util/DesignSystem';
+import {getAsssetByName} from './util/Asset'
 
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
-import SettingScreen from './SettingScreen';
-import ResponderTestScreen from './component/ResponderTestScreen';
-
-
-// const TabBarComponent = (props) => (<BottomTabBar {...props}/>)
+import SettingScreen from './screen/SettingScreen';
+import CategoryScreen from './screen/CategoryScreen'
+import ResponderTestScreen from './screen/ResponderTestScreen';
+import I18n from './res/i18n/i18n'
+import SvgStateImage from './widgets/SvgStateImage'
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 const TAB = createMaterialTopTabNavigator({
-  Home: {screen:HomeScreen,
+  ALL: {screen:CategoryScreen,
     navigationOptions:{
-      tabBarLabel:'今日最新'
+      tabBarLabel:'全部'
     }},
   GIRL: {screen:GirlScreen2,
   navigationOptions:{
@@ -58,96 +57,68 @@ const TAB = createMaterialTopTabNavigator({
 }, {
   header:null,
   tabBarOptions: {
-    activeTintColor: '#4d3241',
+    activeTintColor: Colors.darkLabel,
+    inactiveTintColor:Colors.colorPrimary,
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
-        android: '#4d3241'
+        android: Colors.whiteLabel
       }),
       borderTopColor: 'transparent',
       borderTopWidth: 0,
-      elevation: 0
+      elevation: 4,
     },
     labelStyle: {
       color: Platform.select({
-        ios: null,
-        android: '#fff'
+        ios: Colors.greyLabel,
+        android: Colors.greyLabel,
       })
     },
+    // scrollEnabled:true,
+    tabStyle : {
+      flex:1,
+      justifyContent:'center',
+      alignItems:'center',
+    },
     indicatorStyle: {
-      backgroundColor: '#fff'
+      backgroundColor: Colors.indicatorColor,
+      width:40,
     },
   }
 })
 
-const HomeStack = createStackNavigator({
-  Home: TAB,
-  // ImageDetail:ImageDetail
-}, {
-  defaultNavigationOptions: {
-    header:null,
-    title:'主页',
-    headerTintColor: '#fff',
-    headerStyle: {
-      backgroundColor: '#4d3241',
-    },
-  },
-  navigationOptions: {
-    tabBarLabel: '主页',
-  }
-})
 
-const GirlStack = createStackNavigator({
-  Girl: GirlScreen2,
-  // News:NewsDetail
-}, {
-  defaultNavigationOptions: {
-      header:null,
-      tabBarLabel:'妹子'
-  }
-})
-
-const Drawer = createDrawerNavigator({
-  HOME:HomeStack,
-  Setting:Setting
-},{
-  navigationOptions:{
-      drawerLockMode:'locked-closed',
-  },
-  backBehavior:'none'
-})
-
-// root stack
-// const RootStack = createStackNavigator({
-//   TabNav : TabNavigator,
-//   Detail:NewsDetail
+// const Drawer = createDrawerNavigator({
+//   HOME:CategoryStack,
+//   Setting:Setting
+// },{
+//   navigationOptions:{
+//       drawerLockMode:'locked-closed',
+//   },
+//   backBehavior:'none'
 // })
+
 const BottomTabNavigator = createBottomTabNavigator({
-  // tabBarComponent: props =>
-  //     <TabBarComponent
-  //       {...props}
-  //       style={{ borderTopColor: '#605F60' }}
-  //     />,
   Home: {
-    screen:HomeStack,
+    screen:HomeScreen,
     navigationOptions:{
-      tabBarLabel:'主页',
+      tabBarLabel:I18n.t('latest_today'),
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `infocirlce`
-        return (<StateImage
+        return (<SvgStateImage
+          key={'latest'}
           focus={focused}
-          focusedIcon={'icon_browser_home_current'}
-          normalIcon={'icon_browser_home'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_latest_selected'}
+          normalIcon={'icon_latest_unselected'}
+          size={25}
           />)
       }
     }
   },
-  // Girl: GirlStack,
-    Girl:{
-      screen:GirlStack,
+    Category:{
+      screen:TAB,
       navigationOptions:{
-        tabBarLabel:'妹子',
+        tabBarLabel:'分类',
         tabBarIcon:({tintColor,focused}) => {
           let iconName = `minuscircle`
           // return (<AntDesign
@@ -155,25 +126,39 @@ const BottomTabNavigator = createBottomTabNavigator({
           //   size={26}
           //   color={tintColor}
           // />)
-          return (<StateImage
+          return (<SvgStateImage
           focus={focused}
-          focusedIcon={'icon_contacts_current'}
-          normalIcon={'icon_contacts'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_category_selected'}
+          normalIcon={'icon_category_unselected'}
+          size={25}
           />)
       }
     }
+  },
+  Girl : {
+    screen:GirlScreen2,
+    navigationOptions:{
+      tabBarLabel:'妹子',
+      tabBarIcon:({tintColor,focused}) => {
+        return (<SvgStateImage
+        focus={focused}
+        focusedIcon={'icon_girl_selected'}
+        normalIcon={'icon_girl_unselected'}
+        size={25}
+        />)
+    }
+  }
   },
   Setting : {
     screen:SettingScreen,
     navigationOptions:{
       tabBarLabel:'设置',
       tabBarIcon:({tintColor,focused}) => {
-        return (<StateImage
+        return (<SvgStateImage
           focus={focused}
-          focusedIcon={'icon_setting_focused'}
-          normalIcon={'icon_setting_normal'}
-          style={{width:26,height:26}}
+          focusedIcon={'icon_settings_selected'}
+          normalIcon={'icon_settings_unselected'}
+          size={25}
           />)
       }
     }
@@ -209,20 +194,21 @@ const BottomTabNavigator = createBottomTabNavigator({
   },
 
   tabBarOptions: {
-    activeTintColor: '#aaa',
+    activeTintColor: Colors.greyLabel,
+    inactiveTintColor:'#aaa',
     style: {
       backgroundColor: Platform.select({
         ios: 'white',
-        android: '#4d3241'
+        android: Colors.whiteLabel
       }),
       borderTopColor: 'transparent',
       borderTopWidth: 0,
-      elevation: 0
+      elevation: 4
     },
     labelStyle: {
       color: Platform.select({
         ios: null,
-        android: '#fff'
+        android: Colors.greyLabel
       })
     },
     indicatorStyle: {
@@ -230,41 +216,17 @@ const BottomTabNavigator = createBottomTabNavigator({
     },
     showIcon:'true',
     showLabel:'true',
-    inactiveTintColor:'#aaa',
-    // iconStyle:''
   },
   initialRouteName:'Home',
-  backBehavior:'initialRoute',
-  // tabBarComponent:props => {
-  //   <TabBarComponent {...props} style={{borderTopColor:'#605f60'}}/>
-  // }
-})
+  // backBehavior:'initialRoute',
 
-const styles = StyleSheet.create({
-  container: {
-
-  }
-})
-
-// const Container = createAppContainer(Drawer)
-
-// export default Container
-
-const Model = createStackNavigator({
-    Drawer:Drawer
 })
 
 export default class Navigation extends React.Component {
-  // render() {
-  //   return ([ < StatusBar key = 'statusbar'
-  //     barStyle = 'light-content' /> ,
-  //     <Model/>
-  //   ])
-  // }
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
-    <StatusBar barStyle='light-content' backgroundColor='#4d3241'></StatusBar>
+    <StatusBar barStyle='light-content' backgroundColor={Colors.colorPrimary}></StatusBar>
       <AppContainer/>
     </Context.Provider>
        
@@ -279,14 +241,22 @@ const RootNavigator = createStackNavigator({
   Responder : ResponderTestScreen,
 },{
   // 全屏模式
-  mode:'modal',
-  headerMode:'none',
+  mode:'card',
+  headerMode:'screen',
   defaultNavigationOptions:{
-    header:null,
+    // header:{
+    //     style:{
+    //       // elevation:0,// remove shadow on android
+    //       shadowOpacity:0,// remove shadow on iOS
+    //     }
+    // },
+    title:'Gank.io',
     headerStyle:{
-        backgroundColor:'#4d3241'
+        backgroundColor:Colors.colorPrimary,
+        shadowOpacity:0,
+        elevation:0,
     },
-    headerTintColor:'#fff',
+    headerTintColor:Colors.whiteLabel,
     headerTitleStyle:{
         fontWeight:'bold'
     }

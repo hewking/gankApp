@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
 import {View,StyleSheet,Text,Image,TouchableOpacity} from 'react-native'
-import {getAsssetByName} from '../Asset'
+import {getAsssetByName} from '../util/Asset'
 
 const ICON = getAsssetByName('back')
 

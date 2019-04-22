@@ -3,7 +3,7 @@ import {View
     ,Text
     ,Image
     ,StyleSheet} from 'react-native'
-import TitleBar from './component/TitleBar';
+import TitleBar from '../widgets/TitleBar';
 
 export default class ImageDetail extends Component {
 
@@ -27,7 +27,6 @@ export default class ImageDetail extends Component {
         let desc = navigation.getParam('desc','')
 
         return (<View style={styles.outer}>
-            <TitleBar style={{width:'100%',height:48}} title='妹子图' showLeft={true} navigation={navigation}/>
             <View style={styles.container}>
 
             <Image style={styles.image} source={{uri:url}}/>

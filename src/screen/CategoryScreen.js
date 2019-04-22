@@ -1,10 +1,15 @@
 import React,{Component} from 'react'
-import {View,Text,Button,Image,StyleSheet,TouchableOpacity,ActivityIndicator} from 'react-native'
-import PropTypes  from 'prop-types'
-import RefreshFlatList from './component/refreshList/RefreshFlatList'
-import RefreshState from './component/refreshList/RefreshState';
+import {View
+    ,Text
+    ,Button
+    ,StyleSheet} from 'react-native'
+import RefreshFlatList from '../component/refreshList/RefreshFlatList';
+import {CATEGORY_URL} from '../constant/Api'
+import RefreshState from '../component/refreshList/RefreshState';
+import LoadingView from '../widgets/LoadingView';
+import { Colors } from '../util/DesignSystem';
+import * as L from '../util/L'
 
-const REQUEST_URL = 'http://gank.io/api/data/福利'
 const PAGE_SIZE = 10
 
 export default class extends Component {
@@ -12,20 +17,23 @@ export default class extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isLoad:false,
-            data : [],
+            isLoad : false,
+            datas : [],
         }
+
         this.mPage = 1
+        this.category = this.props.category
+        this.category = '福利'
     }
 
     render(){
         if (this.state.isLoad) {
             return (<RefreshFlatList
-                style={styles.container}
+                styles={styles.container}
                 onHeadRefresh={this._refreshData}
                 onFooterRefresh={this._loadMore}
-                data={this.state.data}
-                renderItem={this._bindItem.bind(this)}
+                data={this.state.datas}
+                renderItem={this._bindItem}
                 keyExtractor={(item) => item._id}
                 ref = {(list) => this.flatList = list}
             />)
@@ -35,36 +43,13 @@ export default class extends Component {
         
     }
 
+    
     componentDidMount(){
         this._refreshData()
     }
 
     renderLoadingView(){
-        return (<View style={{padding : 10,flexDirection:'row',flex:1,justifyContent:'center',alignItems:'center'}}>
-            <ActivityIndicator size='small' style={{margin:10}}/>
-            <Text style={{fontSize : 12,color:'#666666'}}>正在加载中...</Text>
-        </View>)
-    }
-
-    _bindItem({item}) {
-        // console.log('item ' + {...item})
-        return (<TouchableOpacity 
-            style = {{flex:1,
-                flexDirection:'row',
-                justifyContent:'center',
-                alignItems:'center'}}
-            onPress={() => {
-            this.props.navigation.navigate('ImageDetail',{
-                url:item.url,
-                    desc:item.desc,
-                    id:item._id,
-                    title:item.type,
-            })
-        }}>
-            <Image style = {styles.image}
-            source={{uri:item.url}}
-        />
-     </TouchableOpacity>)
+        return (<LoadingView/>)
     }
 
     _refreshData = ()=> {
@@ -78,8 +63,8 @@ export default class extends Component {
     }
 
     _fetchData(page = this.mPage){
-        console.log(`fetchData ${page}`)
-        let url = REQUEST_URL + `/${PAGE_SIZE}/${page}`
+        let url = CATEGORY_URL + `/${this.category}/${PAGE_SIZE}/${page}`
+        L.d('fetch url : ' + url)
         fetch(url).then(resp => (resp.json()))
         .then(respJson => {
             let results = respJson.results
@@ -93,9 +78,10 @@ export default class extends Component {
             } else {
                 state = RefreshState.NoMore
             }
+            L.d('results : ' + results.length)
             this.setState({
                 isLoad : true,
-                data:this.state.data.concat(results)
+                datas:this.state.datas.concat(results)
             })
             this.mPage ++
             this.flatList.endRefreshing(state)
@@ -105,17 +91,36 @@ export default class extends Component {
 
     }
 
+    _bindItem({item}) {
+        return (<View style={styles.item}>
+            <Text style={styles.text}>{item.desc}</Text>
+            <View style={{flexDirection:'row'}}>
+                <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
+                <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
+            </View>
+        </View>)
+    }
+
 }
 
 const styles = StyleSheet.create({
     container : {
-        // justifyContent:'center',
-        // alignItems:'center',
-        flexDirection:'row',
         flex:1,
+        flexDirection:'column'
     },
-    image : {
+    item:{
+        margin:8,
+        borderRadius:3,
+        backgroundColor:Colors.whiteLabel,
+        flexDirection:'column',
+        margin:8,
         width:'100%',
-        height:400,
+    },
+    text : {
+        fontSize : 16,
+        padding : 8,
+        fontStyle:'normal',
+        width:'100%',
+        color:Colors.greyLabel,
     }
 })

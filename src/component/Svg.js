@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SvgUri from 'react-native-svg-uri/index';
 // import SvgUri from 'react-native-svg-uri';
-import svgs from '../assets/svgs';
+import svgs from '../res/assets/svgs';
 
 export default class Svg extends Component {
   render() {
@@ -12,7 +12,6 @@ export default class Svg extends Component {
       style,
       source,
     } = this.props;
-    icon = 'fendi'
     let svgXmlData = svgs[icon];
 
     if (!svgXmlData) {
