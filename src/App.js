@@ -39,6 +39,7 @@ import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
 import SettingScreen from './screen/SettingScreen';
 import CategoryScreen from './screen/CategoryScreen'
+import CategoryContainer from './screen/CategoryContainer'
 import ResponderTestScreen from './screen/ResponderTestScreen';
 import I18n from './res/i18n/i18n'
 import SvgStateImage from './widgets/SvgStateImage'
@@ -116,7 +117,7 @@ const BottomTabNavigator = createBottomTabNavigator({
     }
   },
     Category:{
-      screen:TAB,
+      screen:CategoryContainer,
       navigationOptions:{
         tabBarLabel:'分类',
         tabBarIcon:({tintColor,focused}) => {
@@ -218,7 +219,7 @@ const BottomTabNavigator = createBottomTabNavigator({
     showLabel:'true',
   },
   initialRouteName:'Home',
-  // backBehavior:'initialRoute',
+  backBehavior:'initialRoute',
 
 })
 

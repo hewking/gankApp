@@ -9,6 +9,7 @@ import RefreshState from '../component/refreshList/RefreshState';
 import LoadingView from '../widgets/LoadingView';
 import { Colors } from '../util/DesignSystem';
 import * as L from '../util/L'
+import * as T from '../util/T'
 
 const PAGE_SIZE = 10
 
@@ -99,6 +100,14 @@ export default class extends Component {
                 <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
             </View>
         </View>)
+    }
+
+    onEnter(){
+        T.show('Enter')
+    }
+
+    onLeave(){
+        T.show('Leave')
     }
 
 }
