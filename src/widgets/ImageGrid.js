@@ -58,7 +58,7 @@ export default class extends Component {
         }
 
         // 关键是怎么换行，之类的
-        return (<View style={styles.container}>
+        return (<View style={[styles.container]}>
             {childs}
         </View>)
 

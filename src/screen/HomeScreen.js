@@ -8,6 +8,8 @@ import {View,StyleSheet,Text,Image,FlatList
     ,TouchableOpacity
     ,TouchableWithoutFeedback} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
+import SvgStateImage from '../widgets/SvgStateImage'
+import DateUtils from '../util/DateUtils'
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import ToastExample  from '../component/ToastExample'
 import * as DesignSystem from '../util/DesignSystem'
@@ -22,6 +24,7 @@ import LoadingView from '../widgets/LoadingView';
 import CategoryEntity from '../entitys/CategoryEntity';
 import * as L from '../util/L'
 import GirlEntity from '../entitys/GirlEntity';
+import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 
 const REQUEST_URL = 'http://gank.io/api/today'
@@ -41,8 +44,8 @@ export default class HomeScreen extends Component {
             backgroundColor:'#4d3241'
         },
         headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold',
+        headerTitleStyle: {
+         fontWeight: 'bold',
     },
     }
 
@@ -116,27 +119,40 @@ export default class HomeScreen extends Component {
     }
 
     _renderItemView = (item) => {
-        return ( <TouchableOpacity style={styles.touchable}
+        return ( <TouchableNativeFeedback
             onPress={() => {
                 // ToastExample.show('native',ToastExample.SHORT)
                 this.props.navigation.navigate('Detail',{
                     url:item.url,
                     title:item.desc,
-                })
-            }}>
-            <View style = {styles.container}>
-                <View style={{width:'100%'}}>
-                    {/* {console.log(`item.images => ${item.images}`)} */}
-                    {item.images && (<ImageGrid height={250} width={DesignSystem.ScreenSize.width - 40} images={item.images}/>)}
-                    <Text style={styles.text}>{item.desc}</Text>
-                    <Text>类型:{item.type}</Text>
-                    <View style={{flexDirection:'row'}}>
-                    <Text style={{flex:1}}>作者:{item.who}</Text>
-                    <Text style={{flex:2}}>发布日期:{item.publishedAt}</Text>
+                 })
+               }}>
+                <View style = {styles.itemContainer}>
+                        {/* {console.log(`item.images => ${item.images}`)} */}
+                            {item.images && (this.renderImageGrid(item))}
+                            <Text style={[styles.text,{fontWeight:'bold',marginHorizontal:8,paddingBottom:0}]}>{item.desc}}</Text>
+                            <View style={{flexDirection:'row',flex:1}}>
+                                <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
+                                        <SvgStateImage
+                                            style={styles.img}
+                                            focusedIcon={'icon_personal'}
+                                            normalIcon={'icon_personal'}
+                                            size={16}
+                                        />                        
+                                        <Text style={[styles.text,{fontSize:14,padding:4}]}>作者:{item.who}</Text>
+                                </View>
+                                <View style={{flex:2,flexDirection:'row',alignItems:'center'}}>
+                                        <SvgStateImage
+                                            style={styles.img}
+                                            focusedIcon={'icon_meditor_time'}
+                                            normalIcon={'icon_meditor_time'}
+                                            size={16}
+                                        />                        
+                                        <Text style={[styles.text,{fontSize:14,paddingLeft:4}]}>发布日期:{DateUtils.getTimeDuration(item.publishedAt)}</Text>
+                                </View>
+                            </View>
                 </View>
-            </View>
-            </View>
-            </TouchableOpacity>)
+            </TouchableNativeFeedback>)
     }
 
     _renderCategory = (item) => {
@@ -144,7 +160,15 @@ export default class HomeScreen extends Component {
     }
 
     _renderGirl = (item) => {
-        return <Image style={styles.girl} source={{uri:item.url}}/>
+        return <TouchableWithoutFeedback>
+            <Image style={styles.girl} source={{uri:item.url}}/>
+        </TouchableWithoutFeedback>
+    }
+
+    renderImageGrid = (item) => {
+        return <View style={{ marginHorizontal: 16, marginTop:8, }}>
+            <ImageGrid  height={250} width={DesignSystem.ScreenSize.width - 40} images={item.images} />
+        </View>;
     }
 
     componentDidMount(){
@@ -208,16 +232,11 @@ export default class HomeScreen extends Component {
 const styles = StyleSheet.create({
 
     container : {
-        flex:1,
-        flexDirection:'row',
-        justifyContent:'center',
-        alignItems:'center',
-        backgroundColor:'#f5fcff',
-        // flexDirection:'column'
+        backgroundColor:Colors.background2,
     },
 
     list:{
-        
+        backgroundColor:Colors.background2
     },
 
     touchable:{width:'100%', flex:1, flexDirection:'row', 
@@ -227,7 +246,7 @@ const styles = StyleSheet.create({
         fontSize : 16,
         padding : 8,
         fontStyle:'normal',
-        width:'100%',
+        color:Colors.mainTextLabel2,
     },
     actionButtonIcon: {
         fontSize: 20,
@@ -235,15 +254,33 @@ const styles = StyleSheet.create({
         color: 'white',
       },
       category:{
-        color:'black',
-        fontSize:18,
+        color:Colors.mainTextLabel2,
+        fontSize:24,
         paddingHorizontal:8,
         paddingVertical:10,
-        margin:8,
+        marginHorizontal:8,
+        marginVertical : 15,
+        fontWeight:'bold'
       },
       girl : {
-          width:'100%',
+          flex:1,
           height:400,
-      }
+          marginHorizontal:16,
+          marginTop:16,
+          borderRadius:3,
+      },
+      img : {
+        marginVertical : 8,
+        marginLeft:16,
+    },
+    itemContainer : {
+            marginHorizontal:8,
+            marginTop:4,
+            borderRadius:3,
+            backgroundColor:Colors.whiteLabel,
+            flexDirection:'column',
+            borderWidth:1,
+            borderColor:Colors.shadowBackground
+    }
 
 })
