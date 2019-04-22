@@ -24,7 +24,6 @@ export default class extends Component {
 
         this.mPage = 1
         this.category = this.props.category
-        this.category = '福利'
     }
 
     render(){
@@ -55,7 +54,7 @@ export default class extends Component {
 
     _refreshData = ()=> {
         this.mPage = 1
-        this.state.data = [] // clear data
+        this.state.datas = [] // clear data
         this._fetchData()
     }
 
@@ -94,7 +93,7 @@ export default class extends Component {
 
     _bindItem({item}) {
         return (<View style={styles.item}>
-            <Text style={styles.text}>{item.desc}</Text>
+            <Text style={styles.text}>{item.desc}}</Text>
             <View style={{flexDirection:'row'}}>
                 <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
                 <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
