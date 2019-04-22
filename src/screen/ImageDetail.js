@@ -4,6 +4,7 @@ import {View
     ,Image
     ,StyleSheet} from 'react-native'
 import TitleBar from '../widgets/TitleBar';
+import ImageViewr from 'react-native-image-zoom-viewer'
 
 export default class ImageDetail extends Component {
 
@@ -26,12 +27,18 @@ export default class ImageDetail extends Component {
         let url = navigation.getParam('url','')
         let desc = navigation.getParam('desc','')
 
-        return (<View style={styles.outer}>
-            <View style={styles.container}>
+        // return (<View style={styles.outer}>
+        //     <View style={styles.container}>
 
-            <Image style={styles.image} source={{uri:url}}/>
-            <Text style={styles.text}>{desc}</Text>
-            </View>
+        //     <Image style={styles.image} source={{uri:url}}/>
+        //     <Text style={styles.text}>{desc}</Text>
+        //     </View>
+        // </View>)
+        let imgs = [{url:url}]
+        return (<View style={{flex:1}}>
+            <ImageViewr
+                imageUrls={imgs}
+            />
         </View>)
     }
 

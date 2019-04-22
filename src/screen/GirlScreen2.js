@@ -1,9 +1,13 @@
 import React,{Component} from 'react'
-import {View,Text,Button,Image,StyleSheet,TouchableOpacity,ActivityIndicator} from 'react-native'
+import {View,Text,Button,Image,StyleSheet
+    ,TouchableOpacity
+    ,ActivityIndicator
+    ,TouchableNativeFeedback} from 'react-native'
 import PropTypes  from 'prop-types'
 import RefreshFlatList from '../component/refreshList/RefreshFlatList'
 import RefreshState from '../component/refreshList/RefreshState';
 import LoadingView from '../widgets/LoadingView';
+import { Colors } from '../util/DesignSystem';
 
 const REQUEST_URL = 'http://gank.io/api/data/福利'
 const PAGE_SIZE = 10
@@ -46,14 +50,11 @@ export default class extends Component {
 
     _bindItem({item}) {
         // console.log('item ' + {...item})
-        return (<TouchableOpacity 
-            style = {{flex:1,
-                flexDirection:'row',
-                justifyContent:'center',
-                alignItems:'center'}}
-            onPress={() => {
-            this.props.navigation.navigate('ImageDetail',{
-                url:item.url,
+        return (<TouchableNativeFeedback 
+            style = {styles.imgContaner}
+                onPress={() => {
+                this.props.navigation.navigate('ImageDetail',{
+                    url:item.url,
                     desc:item.desc,
                     id:item._id,
                     title:item.type,
@@ -62,7 +63,7 @@ export default class extends Component {
             <Image style = {styles.image}
             source={{uri:item.url}}
         />
-     </TouchableOpacity>)
+     </TouchableNativeFeedback>)
     }
 
     _refreshData = ()=> {
@@ -113,7 +114,19 @@ const styles = StyleSheet.create({
         flex:1,
     },
     image : {
-        width:'100%',
+        flex:1,
         height:400,
+        borderRadius:3,
+        marginHorizontal:16,
+        marginTop:16,
+        // resizeMode:'contain',
+        backgroundColor:Colors.whiteLabel,
+    },
+    imgContaner : {
+        flex:1,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor:Colors.background2
     }
 })
