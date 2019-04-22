@@ -45,7 +45,7 @@ export default class extends Component {
                 }
                 let targetIndex = index
                 childsInContainer.push(<Image
-                    style={{width:childSize,height:childSize,alignSelf:'center',resizeMode:'cover',borderRadius:3}}
+                    style={{width:childSize,height:childSize,alignSelf:'center',resizeMode:'contain',borderRadius:3}}
                     source={{uri:images[targetIndex]}}
                     key={images[targetIndex]}// 在List中必须指定Key唯一标识
                 />)
