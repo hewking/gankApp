@@ -195,28 +195,28 @@ const BottomTabNavigator = createBottomTabNavigator({
   },
 
   tabBarOptions: {
-    activeTintColor: Colors.greyLabel,
-    inactiveTintColor:'#aaa',
-    style: {
-      backgroundColor: Platform.select({
-        ios: 'white',
-        android: Colors.whiteLabel
-      }),
-      borderTopColor: 'transparent',
-      borderTopWidth: 0,
-      elevation: 4
-    },
-    labelStyle: {
-      color: Platform.select({
-        ios: null,
-        android: Colors.greyLabel
-      })
-    },
-    indicatorStyle: {
-      backgroundColor: '#fff'
-    },
-    showIcon:'true',
-    showLabel:'true',
+    activeTintColor: Colors.colorPrimary,
+    inactiveTintColor:Colors.darkLabel,
+    // style: {
+    //   backgroundColor: Platform.select({
+    //     ios: 'white',
+    //     android: Colors.whiteLabel
+    //   }),
+    //   borderTopColor: 'transparent',
+    //   borderTopWidth: 0,
+    //   elevation: 4
+    // },
+    // labelStyle: {
+    //   color: Platform.select({
+    //     ios: Colors.colorPrimary,
+    //     android: Colors.colorPrimary
+    //   })
+    // },
+    // indicatorStyle: {
+    //   backgroundColor: '#fff'
+    // },
+  //   showIcon:'true',
+  //   showLabel:'true',
   },
   initialRouteName:'Home',
   backBehavior:'initialRoute',
