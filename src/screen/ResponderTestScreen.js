@@ -18,6 +18,10 @@ export default class extends Component {
         }
     }
 
+    componentDidMount(){
+        
+    }
+
     componentWillMount(){
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: (evt, gestureState) => {

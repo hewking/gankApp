@@ -160,7 +160,15 @@ export default class HomeScreen extends Component {
     }
 
     _renderGirl = (item) => {
-        return <TouchableWithoutFeedback>
+        return <TouchableWithoutFeedback 
+        onPress={() => {
+            this.props.navigation.navigate('ImageDetail',{
+                url:item.url,
+                desc:item.desc,
+                id:item._id,
+                title:item.type,
+        })
+    }}>
             <Image style={styles.girl} source={{uri:item.url}}/>
         </TouchableWithoutFeedback>
     }
