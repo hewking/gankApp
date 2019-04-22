@@ -32,7 +32,33 @@ const DateUtils = {
         }
         return fmt
       }
-    }
+    },
+
+     getTimeDuration(comTime) {
+        var nowTime = new Date();
+        var compareTime = new Date(comTime);
+        console.log('now : ' + nowTime.getTime() + " compre : " + compareTime.getTime())
+        if (nowTime.getTime() > compareTime.getTime()) {
+          if (nowTime.getFullYear() == compareTime.getFullYear()) {
+            if (nowTime.getMonth() == compareTime.getMonth()) {
+              if (nowTime.getDay() == compareTime.getDay()) {
+                if (nowTime.getHours() == compareTime.getHours()) {
+                  if (nowTime.getMinutes() == compareTime.getMinutes()) {
+                    return '片刻之间';
+                  }
+                  return (nowTime.getMinutes() - compareTime.getMinutes()).toString() + '分钟前';
+                }
+                return (nowTime.getHours() - compareTime.getHours()).toString() + '小时前';
+              }
+              return (nowTime.getDay() - compareTime.getDay()).toString() + '天前';
+            }
+            return (nowTime.getMonth() - compareTime.getMonth()).toString() + '月前';
+          }
+          return (nowTime.getFullYear() - compareTime.getFullYear()).toString() + '年前';
+        }
+        return 'time error';
+      }
+
   }
   
   DateUtils.extendDate()

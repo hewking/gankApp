@@ -11,6 +11,9 @@ import { Colors } from '../util/DesignSystem';
 import * as L from '../util/L'
 import * as T from '../util/T'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Svg from '../component/Svg';
+import SvgStateImage from '../widgets/SvgStateImage'
+import DateUtils from '../util/DateUtils'
 
 const PAGE_SIZE = 10
 
@@ -106,8 +109,24 @@ export default class extends Component {
             <View style={styles.item}>
                 <Text style={[styles.text,{fontWeight:'bold'}]}>{item.desc}}</Text>
                 <View style={{flexDirection:'row'}}>
-                    <Text style={[styles.text,{fontSize:14}]}>作者:{item.who}</Text>
-                    <Text style={[styles.text,{fontSize:14}]}>发布日期:{item.publishedAt}</Text>
+                    <View style={{flex:1,flexDirection:'row',alignItems:'center'}}>
+                            <SvgStateImage
+                                style={styles.img}
+                                focusedIcon={'icon_personal'}
+                                normalIcon={'icon_personal'}
+                                size={16}
+                            />                        
+                            <Text style={[styles.text,{fontSize:14,padding:4}]}>作者:{item.who}</Text>
+                    </View>
+                    <View style={{flex:2,flexDirection:'row',alignItems:'center'}}>
+                            <SvgStateImage
+                                style={styles.img}
+                                focusedIcon={'icon_meditor_time'}
+                                normalIcon={'icon_meditor_time'}
+                                size={16}
+                            />                        
+                            <Text style={[styles.text,{fontSize:14,paddingLeft:4}]}>发布日期:{DateUtils.getTimeDuration(item.publishedAt)}</Text>
+                    </View>
                 </View>
             </View>
         </TouchableWithoutFeedback>)
@@ -142,7 +161,10 @@ const styles = StyleSheet.create({
         fontSize : 16,
         padding : 8,
         fontStyle:'normal',
-        width:'100%',
         color:Colors.mainTextLabel2,
+    },
+    img : {
+        marginVertical : 8,
+        marginLeft:8,
     }
 })
