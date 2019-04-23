@@ -20,6 +20,7 @@ import PlatformTouchable from '../widgets/PlatformTouchable'
 import Search from 'react-native-search-box'
 import {getAsssetByName} from '../util/Asset'
 import RefreshState from '../component/refreshList/RefreshState';
+import LoadingDialog from '../component/LoadingDialog';
 
 export default class extends BaseListScreen {
 
@@ -39,6 +40,7 @@ export default class extends BaseListScreen {
 
     render(){
         return (<View style={{flex:1,flexDirection:'column'}}>
+                        <LoadingDialog ref={(ref) => this.loading = ref}/>
                         <Search
                         ref="search_box"
                         onSearch={this.onSearch}
@@ -109,6 +111,7 @@ export default class extends BaseListScreen {
     }
 
     loadData(url){
+        this.loading.setModalVisible(true)
         fetch(url).then(resp => (resp.json()))
         .then(respJson => {
             let results = respJson.results
@@ -124,8 +127,10 @@ export default class extends BaseListScreen {
             })
             this.mPage ++
             this.flatList.endRefreshing(RefreshState.NoMore)
+            this.loading.setModalVisible(false)
         }).catch(err => {
             this.flatList.endRefreshing(RefreshState.Failure)
+            this.loading.setModalVisible(false)
         })
     }
 
