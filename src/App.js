@@ -46,47 +46,47 @@ import SvgStateImage from './widgets/SvgStateImage'
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
-const TAB = createMaterialTopTabNavigator({
-  ALL: {screen:CategoryScreen,
-    navigationOptions:{
-      tabBarLabel:'全部'
-    }},
-  GIRL: {screen:GirlScreen2,
-  navigationOptions:{
-    tabBarLabel:'妹子图'
-  }},
-}, {
-  header:null,
-  tabBarOptions: {
-    activeTintColor: Colors.darkLabel,
-    inactiveTintColor:Colors.colorPrimary,
-    style: {
-      backgroundColor: Platform.select({
-        ios: 'white',
-        android: Colors.whiteLabel
-      }),
-      borderTopColor: 'transparent',
-      borderTopWidth: 0,
-      elevation: 4,
-    },
-    labelStyle: {
-      color: Platform.select({
-        ios: Colors.greyLabel,
-        android: Colors.greyLabel,
-      })
-    },
-    // scrollEnabled:true,
-    tabStyle : {
-      flex:1,
-      justifyContent:'center',
-      alignItems:'center',
-    },
-    indicatorStyle: {
-      backgroundColor: Colors.indicatorColor,
-      width:40,
-    },
-  }
-})
+// const TAB = createMaterialTopTabNavigator({
+//   ALL: {screen:CategoryScreen,
+//     navigationOptions:{
+//       tabBarLabel:'全部'
+//     }},
+//   GIRL: {screen:GirlScreen2,
+//   navigationOptions:{
+//     tabBarLabel:'妹子图'
+//   }},
+// }, {
+//   header:null,
+//   tabBarOptions: {
+//     activeTintColor: Colors.darkLabel,
+//     inactiveTintColor:Colors.colorPrimary,
+//     style: {
+//       backgroundColor: Platform.select({
+//         ios: 'white',
+//         android: Colors.whiteLabel
+//       }),
+//       borderTopColor: 'transparent',
+//       borderTopWidth: 0,
+//       elevation: 4,
+//     },
+//     labelStyle: {
+//       color: Platform.select({
+//         ios: Colors.greyLabel,
+//         android: Colors.greyLabel,
+//       })
+//     },
+//     // scrollEnabled:true,
+//     tabStyle : {
+//       flex:1,
+//       justifyContent:'center',
+//       alignItems:'center',
+//     },
+//     indicatorStyle: {
+//       backgroundColor: Colors.indicatorColor,
+//       width:40,
+//     },
+//   }
+// })
 
 
 // const Drawer = createDrawerNavigator({
@@ -224,6 +224,13 @@ const BottomTabNavigator = createBottomTabNavigator({
 })
 
 export default class Navigation extends React.Component {
+
+  static navigationOptions = ({navigation}) => {
+    return {
+      
+    }
+  }
+
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
