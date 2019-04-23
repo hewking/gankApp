@@ -25,8 +25,7 @@ import LoadingView from '../widgets/LoadingView';
 import CategoryEntity from '../entitys/CategoryEntity';
 import * as L from '../util/L'
 import GirlEntity from '../entitys/GirlEntity';
-// import { TouchableNativeFeedback } from 'react-native-gesture-handler';
-
+import PlatformTouchable from '../widgets/PlatformTouchable'
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
@@ -111,7 +110,7 @@ export default class HomeScreen extends Component {
     }
 
     _renderItemView = (item) => {
-        return ( <TouchableOpacity
+        return ( <PlatformTouchable
             onPress={() => {
                 // ToastExample.show('native',ToastExample.SHORT)
                 this.props.navigation.navigate('Detail',{
@@ -144,7 +143,7 @@ export default class HomeScreen extends Component {
                                 </View>
                             </View>
                 </View>
-            </TouchableOpacity>)
+            </PlatformTouchable>)
     }
 
     _renderCategory = (item) => {
@@ -152,7 +151,7 @@ export default class HomeScreen extends Component {
     }
 
     _renderGirl = (item) => {
-        return <TouchableWithoutFeedback 
+        return <PlatformTouchable 
         onPress={() => {
             this.props.navigation.navigate('ImageDetail',{
                 url:item.url,
@@ -162,7 +161,7 @@ export default class HomeScreen extends Component {
         })
     }}>
             <Image style={styles.girl} source={{uri:item.url}}/>
-        </TouchableWithoutFeedback>
+        </PlatformTouchable>
     }
 
     renderImageGrid = (item) => {

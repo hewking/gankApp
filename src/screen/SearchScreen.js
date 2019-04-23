@@ -16,23 +16,20 @@ import SvgStateImage from '../widgets/SvgStateImage'
 import DateUtils from '../util/DateUtils'
 import Api from '../constant/Api'
 import BaseListScreen from '../component/BaseListScreen'
+import PlatformTouchable from '../widgets/PlatformTouchable'
 
 export default class extends BaseListScreen {
 
-    static navigationOptions = ({navigation}) => {
-        return {
-
-            headerTitle = (<View>
-                    <TextInput/>
-            </View>)
-        }
-    }
+    // static navigationOptions = ({navigation}) => {
+    //     return {
+    //     }
+    // }
 
     /**
      * 返回itemView
      */
     renderContentView(){
-        return (<TouchableWithoutFeedback   onPress={() => {
+        return (<PlatformTouchable   onPress={() => {
             L.d('catregory navigation ' + this.props)
             this.props.navigation.navigate('Detail',{
                 url:item.url,
@@ -62,7 +59,7 @@ export default class extends BaseListScreen {
                     </View>
                 </View>
             </View>
-        </TouchableWithoutFeedback>)
+        </PlatformTouchable>)
     }
 
     renderRootView(){
@@ -72,7 +69,7 @@ export default class extends BaseListScreen {
     }
 
     loadData(){
-        
+
     }
 
     buildUrl(){

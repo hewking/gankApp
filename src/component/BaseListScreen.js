@@ -3,13 +3,12 @@ import {View
     ,Text
     ,Button
     ,StyleSheet} from 'react-native'
-import RefreshFlatList from '../refreshList/RefreshFlatList';
-import RefreshState from '../refreshList/RefreshState';
+import RefreshFlatList from './refreshList/RefreshFlatList';
+import RefreshState from './refreshList/RefreshState';
 import LoadingView from '../widgets/LoadingView';
 import { Colors } from '../util/DesignSystem';
 import * as L from '../util/L'
 import * as T from '../util/T'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const PAGE_SIZE = 10
 
@@ -102,7 +101,7 @@ export default class extends Component {
     }
 
     _fetchData(page = this.mPage){
-        let url = buildUrl()
+        let url = this.buildUrl()
         L.d('fetch url : ' + url)
         this.loadData(url)
 

@@ -8,6 +8,7 @@ import RefreshFlatList from '../component/refreshList/RefreshFlatList'
 import RefreshState from '../component/refreshList/RefreshState';
 import LoadingView from '../widgets/LoadingView';
 import { Colors } from '../util/DesignSystem';
+import PlatformTouchable from '../widgets/PlatformTouchable'
 
 const REQUEST_URL = 'http://gank.io/api/data/福利'
 const PAGE_SIZE = 10
@@ -55,7 +56,7 @@ export default class extends Component {
 
     _bindItem({item}) {
         // console.log('item ' + {...item})
-        return (<TouchableOpacity 
+        return (<PlatformTouchable 
             style = {styles.imgContaner}
                 onPress={() => {
                 this.props.navigation.navigate('ImageDetail',{
@@ -68,7 +69,7 @@ export default class extends Component {
             <Image style = {styles.image}
             source={{uri:item.url}}
         />
-     </TouchableOpacity>)
+     </PlatformTouchable>)
     }
 
     _refreshData = ()=> {

@@ -14,6 +14,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import Svg from '../component/Svg';
 import SvgStateImage from '../widgets/SvgStateImage'
 import DateUtils from '../util/DateUtils'
+import PlatformTouchable from '../widgets/PlatformTouchable'
 
 const PAGE_SIZE = 10
 
@@ -99,7 +100,7 @@ export default class extends Component {
     }
 
     _bindItem({item}) {
-        return (<TouchableWithoutFeedback   onPress={() => {
+        return (<PlatformTouchable   onPress={() => {
             L.d('catregory navigation ' + this.props)
             this.props.navigation.navigate('Detail',{
                 url:item.url,
@@ -129,7 +130,7 @@ export default class extends Component {
                     </View>
                 </View>
             </View>
-        </TouchableWithoutFeedback>)
+        </PlatformTouchable>)
     }
 
     onEnter(){

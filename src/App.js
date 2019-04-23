@@ -38,7 +38,7 @@ import {getAsssetByName} from './util/Asset'
 import { createIconSetFromFontello } from 'react-native-vector-icons'
 import StateImage from './widgets/StateImage';
 import SettingScreen from './screen/SettingScreen';
-import CategoryScreen from './screen/CategoryScreen'
+import SearchScreen from './screen/SearchScreen'
 import CategoryContainer from './screen/CategoryContainer'
 import ResponderTestScreen from './screen/ResponderTestScreen';
 import I18n from './res/i18n/i18n'
@@ -226,14 +226,6 @@ const BottomTabNavigator = createBottomTabNavigator({
 
 export default class Navigation extends React.Component {
 
-  static navigationOptions = ({navigation}) => {
-    return {
-      headerRight: <Svg 
-                      size={20}
-                      icon={'icon_search'}/>,
-    }
-  }
-
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
@@ -245,11 +237,32 @@ export default class Navigation extends React.Component {
   }
 }
 
+class BottomTabNavigation extends Component {
+    static navigationOptions = ({navigation}) => {
+    return {
+      headerRight:<TouchableNativeFeedback onPress = {() => {
+        navigation.navigate('Search')
+    }}>
+      <Svg  style={{padding:16}}
+                      size={24}
+                      icon={'icon_search'}/>
+     </TouchableNativeFeedback>
+    
+    }
+  }
+
+    render(){
+      const Container = createAppContainer(BottomTabNavigator)
+        return (<Container/>)
+    }
+}
+
 const RootNavigator = createStackNavigator({
-  Main : BottomTabNavigator,
+  Main : BottomTabNavigation,
   ImageDetail:ImageDetail,
   Detail:NewsDetail,
   Responder : ResponderTestScreen,
+  Search:SearchScreen,
 },{
   // 全屏模式
   mode:'card',
@@ -271,13 +284,7 @@ const RootNavigator = createStackNavigator({
     headerTitleStyle:{
         fontWeight:'bold'
     },
-    headerRight:<TouchableNativeFeedback onPress = {() => {
-        this.props.navigation.navigate('')
-    }}>
-      <Svg  style={{padding:16}}
-                      size={24}
-                      icon={'icon_search'}/>
-    </TouchableNativeFeedback>
+    
 }})
 
 const AppContainer = createAppContainer(RootNavigator)
