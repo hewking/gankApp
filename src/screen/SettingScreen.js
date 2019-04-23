@@ -1,25 +1,25 @@
 import React,{Component} from 'react'
-import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
+import {View,Text,StyleSheet,TouchableOpacity
+    ,ScrollView} from 'react-native'
 import { Colors } from '../util/DesignSystem';
+import SettingItem from '../widgets/SettingItem'
 
 export default class SettingScreen extends Component {
 
     render(){
         return (<View style={styles.container}>
-                    <View style={{width:'100%',height:48,backgroundColor:Colors.colorPrimary,position:'absolute'
-                ,left:0,top:0}}/>
-            <TouchableOpacity style={styles.textContainer} onPress = {() => this.props.navigation.navigate('Responder')}>
-               <Text style={styles.text}>设置页面</Text>
-            </TouchableOpacity>
-
+            <ScrollView style={{flex:1,width:'100%'}}>
+                <SettingItem style={styles.item} icon={'icon_clear'} title={'清除缓存'} onPress={() => {
+                    this.props.navigation.navigate('Responder')
+                }}/>
+            </ScrollView>
         </View>)
     }
-
-
 }
 
 const styles = StyleSheet.create({
-    container : {flex:1,justifyContent:'center',alignItems:'center'},
+    container : {flex:1,justifyContent:'center',alignItems:'center'
+,backgroundColor:Colors.whiteLabel},
     text : {
         paddingTop:10,
         paddingBottom:10,
@@ -31,5 +31,8 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         backgroundColor:Colors.lightBackground
+    },
+    item:{
+        marginVertical:16,
     }
 })
