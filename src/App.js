@@ -43,6 +43,8 @@ import CategoryContainer from './screen/CategoryContainer'
 import ResponderTestScreen from './screen/ResponderTestScreen';
 import I18n from './res/i18n/i18n'
 import SvgStateImage from './widgets/SvgStateImage'
+import Svg from './component/Svg'
+import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
@@ -128,10 +130,10 @@ const BottomTabNavigator = createBottomTabNavigator({
           //   color={tintColor}
           // />)
           return (<SvgStateImage
-          focus={focused}
-          focusedIcon={'icon_category_selected'}
-          normalIcon={'icon_category_unselected'}
-          size={25}
+            focus={focused}
+            focusedIcon={'icon_category_selected'}
+            normalIcon={'icon_category_unselected'}
+            size={25}
           />)
       }
     }
@@ -193,7 +195,6 @@ const BottomTabNavigator = createBottomTabNavigator({
       return <AntDesign name={`minuscircle`} size={25} color={tintColor} />;  
     }
   },
-
   tabBarOptions: {
     activeTintColor: Colors.colorPrimary,
     inactiveTintColor:Colors.darkLabel,
@@ -227,7 +228,9 @@ export default class Navigation extends React.Component {
 
   static navigationOptions = ({navigation}) => {
     return {
-      
+      headerRight: <Svg 
+                      size={20}
+                      icon={'icon_search'}/>,
     }
   }
 
@@ -267,7 +270,14 @@ const RootNavigator = createStackNavigator({
     headerTintColor:Colors.whiteLabel,
     headerTitleStyle:{
         fontWeight:'bold'
-    }
+    },
+    headerRight:<TouchableNativeFeedback onPress = {() => {
+        this.props.navigation.navigate('')
+    }}>
+      <Svg  style={{padding:16}}
+                      size={24}
+                      icon={'icon_search'}/>
+    </TouchableNativeFeedback>
 }})
 
 const AppContainer = createAppContainer(RootNavigator)

@@ -9,7 +9,7 @@ http://gank.io/api/search/query/listview/category/Android/count/10/page/1
 category 后面可接受参数 all | Android | iOS | 休息视频 | 福利 | 拓展资源 | 前端 | 瞎推荐 | App
 count 最大 50
  */
-const SEARCH_URL = `${BASE_URL}/search/query/listview/category`
+const SEARCH_URL = `https://gank.io/search`
 
 /**
  * 分类

@@ -3,13 +3,15 @@ import {View,Button,Text,StyleSheet,TouchableOpacity
 } from 'react-native'
 import {WebView} from 'react-native-webview'
 import * as L from '../util/L'
+import Svg from '../component/Svg'
 
 export default class NewsDetail extends Component{
 
     static navigationOptions = ({navigation}) => {
         L.d('navigation title ' + navigation.getParam('title','Gank.iO'))
         return {
-            title:navigation.getParam('title','Gank.iO')
+            title:navigation.getParam('title','Gank.iO'),
+            headerRight:null,
         }
     }
 

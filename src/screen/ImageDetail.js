@@ -10,7 +10,8 @@ export default class ImageDetail extends Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            title:navigation.getParam('title',"妹子大图")
+            title:navigation.getParam('title',"妹子大图"),
+            headerRight:null,
         }
     }
 

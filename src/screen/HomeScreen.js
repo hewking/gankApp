@@ -74,26 +74,17 @@ export default class HomeScreen extends Component {
                     refreshing={false}
                     ref = {(list => this.flatList = list)}
                 />
-            {
-        }
-
-            <TouchableWithoutFeedback style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
+            {/* <TouchableWithoutFeedback style={{backgroundColor: '#f3f3f3',position:'absolute',bottom:120,right:10}}
             onPress={() => {
                 ToastAndroid.show('float action',ToastAndroid.SHORT)
-            }}>
-                    {/* Rest of the app comes ABOVE the action button component !*/}
+                 }}>
+                    Rest of the app comes ABOVE the action button component !
                     <ActionButton buttonColor="rgba(231,76,60,1)">
-                    <ActionButton.Item buttonColor='#9b59b6' title="New Task" onPress={() => console.log("notes tapped!")}>
-                        <Icon name="md-create" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#3498db' title="Notifications" onPress={() => {}}>
-                        <Icon name="md-notifications-off" style={styles.actionButtonIcon} />
-                    </ActionButton.Item>
-                    <ActionButton.Item buttonColor='#1abc9c' title="All Tasks" onPress={() => {}}>
-                        <Icon name="md-done-all" style={styles.actionButtonIcon} />
+                    <ActionButton.Item buttonColor='#1abc9c' title="搜索" onPress={() => {}}>
+                        <Icon name="md-search" style={styles.actionButtonIcon} />
                     </ActionButton.Item>
                     </ActionButton>
-                </TouchableWithoutFeedback>
+                </TouchableWithoutFeedback> */}
             </View>)
         } else {
             return this.rendeLoadingView()
