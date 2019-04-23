@@ -19,23 +19,50 @@ import BaseListScreen from '../component/BaseListScreen'
 import PlatformTouchable from '../widgets/PlatformTouchable'
 import Search from 'react-native-search-box'
 import {getAsssetByName} from '../util/Asset'
+import RefreshState from '../component/refreshList/RefreshState';
 
 export default class extends BaseListScreen {
 
     static navigationOptions = ({navigation}) => {
+
         return {
-            headerTitle:<Image source={getAsssetByName('icon_browser_home')}/>,
-            headerTitleStyle:{
-                flexDirection:'row',
-                justifyContent:'flex-start'
-            }
+            title:'搜索'
+            // headerTitle:<View style={{flex:1}}><Search
+            //     style={{backgroundColor:Colors.colorPrimary}}
+            // /></View>,
+            // headerTitleStyle:{
+            //     flexDirection:'row',
+            //     justifyContent:'flex-start'
+            // }
         }
+    }
+
+    render(){
+        return (<View style={{flex:1,flexDirection:'column'}}>
+                        <Search
+                        ref="search_box"
+                        onSearch={this.onSearch}
+                        placeholder={'搜索'}
+                        cancelTitle='取消'
+                        backgroundColor={Colors.greyLabel}
+            />
+                {super.render()}
+        </View>)
+    }
+
+    onSearch = (searchText) => {
+        return new Promise((resolve, reject) => {
+            console.log(searchText);
+            console.log('Add your search function here.');
+            this.search(searchText)
+            resolve();
+        });
     }
 
     /**
      * 返回itemView
      */
-    renderContentView(){
+    renderContentView({item}){
         return (<PlatformTouchable   onPress={() => {
             L.d('catregory navigation ' + this.props)
             this.props.navigation.navigate('Detail',{
@@ -71,24 +98,48 @@ export default class extends BaseListScreen {
 
     renderLoadingView(){
         return <View style={{padding : 10,flexDirection:'column',flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Text style={{fontSize : 12,color:'#666666'}}>搜索指定内容</Text>
+        <Text style={{fontSize : 12,color:Colors.darkLabel}}>搜索指定内容</Text>
     </View>
     }
 
     renderRootView(){
-        return (<View style={{flexDirection:'column'}}>
+        return (<View style={{flex:1,flexDirection:'column'}}>
              {super.renderRootView()}
         </View>)
     }
 
-    loadData(){
+    loadData(url){
+        fetch(url).then(resp => (resp.json()))
+        .then(respJson => {
+            let results = respJson.results
+            let length = results.length
+            // 改变底部状态 调用endRefreshing函数
+            // 如果 length < 10 说明没有更多可以加载了 NO_MORE
+            // lenght >= 10 可以加载
+
+            L.d('results : ' + results.length)
+            this.setState({
+                isLoad : true,
+                datas:this.state.datas.concat(results)
+            })
+            this.mPage ++
+            this.flatList.endRefreshing(RefreshState.NoMore)
+        }).catch(err => {
+            this.flatList.endRefreshing(RefreshState.Failure)
+        })
+    }
+
+    search = (saerchText) => {
+        //`${Api.SEARCH_URL}?q=${keyword}`
+        let url = 'http://gank.io/api/data/Android/10/1'
+        this.loadData(url)
+    }
+
+
+    componentDidMount(){
 
     }
 
-    buildUrl(){
-        let keyword = 'rn'
-        return `${Api.SEARCH_URL}?q=${keyword}`
-    }
 }
 
 const styles = StyleSheet.create({

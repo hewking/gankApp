@@ -68,25 +68,8 @@ export default class extends Component {
         this._fetchData()
     }
 
-    loadData(url){
-        fetch(url).then(resp => (resp.json()))
-        .then(respJson => {
-            let results = respJson.results
-            let length = results.length
-            // 改变底部状态 调用endRefreshing函数
-            // 如果 length < 10 说明没有更多可以加载了 NO_MORE
-            // lenght >= 10 可以加载
-
-            L.d('results : ' + results.length)
-            this.setState({
-                isLoad : true,
-                datas:this.state.datas.concat(results)
-            })
-            this.mPage ++
-            this.endRefreshing(length);
-        }).catch(err => {
-            this.flatList.endRefreshing(RefreshState.Failure)
-        })
+    loadData(){
+        
     }
 
     endRefreshing(length) {
@@ -101,13 +84,9 @@ export default class extends Component {
     }
 
     _fetchData(page = this.mPage){
-        let url = this.buildUrl()
-        L.d('fetch url : ' + url)
-        this.loadData(url)
-
-    }
-
-    buildUrl(){
+        // let url = this.buildUrl()
+        // L.d('fetch url : ' + url)
+        this.loadData()
 
     }
 

@@ -1,5 +1,5 @@
-
 export default {
+
     Idle : 'Idle',
     LoadMore : 'LoadMore',
     Refreshing : 'Refreshing',

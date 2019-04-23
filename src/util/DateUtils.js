@@ -37,7 +37,7 @@ const DateUtils = {
      getTimeDuration(comTime) {
         var nowTime = new Date();
         var compareTime = new Date(comTime);
-        console.log('now : ' + nowTime.getTime() + " compre : " + compareTime.getTime())
+        // console.log('now : ' + nowTime.getTime() + " compre : " + compareTime.getTime())
         if (nowTime.getTime() > compareTime.getTime()) {
           if (nowTime.getFullYear() == compareTime.getFullYear()) {
             if (nowTime.getMonth() == compareTime.getMonth()) {
