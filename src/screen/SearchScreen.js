@@ -17,13 +17,20 @@ import DateUtils from '../util/DateUtils'
 import Api from '../constant/Api'
 import BaseListScreen from '../component/BaseListScreen'
 import PlatformTouchable from '../widgets/PlatformTouchable'
+import Search from 'react-native-search-box'
+import {getAsssetByName} from '../util/Asset'
 
 export default class extends BaseListScreen {
 
-    // static navigationOptions = ({navigation}) => {
-    //     return {
-    //     }
-    // }
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle:<Image source={getAsssetByName('icon_browser_home')}/>,
+            headerTitleStyle:{
+                flexDirection:'row',
+                justifyContent:'flex-start'
+            }
+        }
+    }
 
     /**
      * 返回itemView
@@ -60,6 +67,12 @@ export default class extends BaseListScreen {
                 </View>
             </View>
         </PlatformTouchable>)
+    }
+
+    renderLoadingView(){
+        return <View style={{padding : 10,flexDirection:'column',flex:1,justifyContent:'center',alignItems:'center'}}>
+        <Text style={{fontSize : 12,color:'#666666'}}>搜索指定内容</Text>
+    </View>
     }
 
     renderRootView(){

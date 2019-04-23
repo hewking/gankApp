@@ -10,6 +10,12 @@ import { Colors } from '../util/DesignSystem';
 
 export default class extends Component{
 
+  static navigationOptions = ({navigation}) => {
+    return {
+        headerRight:null,
+    }
+  }
+
     constructor(props) {
         super(props)
 
