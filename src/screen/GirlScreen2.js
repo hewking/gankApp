@@ -25,15 +25,20 @@ export default class extends Component {
 
     render(){
         if (this.state.isLoad) {
-            return (<RefreshFlatList
-                style={styles.container}
-                onHeadRefresh={this._refreshData}
-                onFooterRefresh={this._loadMore}
-                data={this.state.data}
-                renderItem={this._bindItem.bind(this)}
-                keyExtractor={(item) => item._id}
-                ref = {(list) => this.flatList = list}
-            />)
+            return (
+            <View style = {styles.background}>
+                <RefreshFlatList
+                    style={styles.container}
+                    onHeadRefresh={this._refreshData.bind(this)}
+                    onFooterRefresh={this._loadMore.bind(this)}
+                    data={this.state.data}
+                    renderItem={this._bindItem.bind(this)}
+                    keyExtractor={(item) => item._id}
+                    ref = {(list) => this.flatList = list}
+                />
+            </View>
+            
+            )
         } else {
             return this.renderLoadingView()
         }
@@ -50,7 +55,7 @@ export default class extends Component {
 
     _bindItem({item}) {
         // console.log('item ' + {...item})
-        return (<TouchableNativeFeedback 
+        return (<TouchableOpacity 
             style = {styles.imgContaner}
                 onPress={() => {
                 this.props.navigation.navigate('ImageDetail',{
@@ -63,7 +68,7 @@ export default class extends Component {
             <Image style = {styles.image}
             source={{uri:item.url}}
         />
-     </TouchableNativeFeedback>)
+     </TouchableOpacity>)
     }
 
     _refreshData = ()=> {
@@ -107,11 +112,15 @@ export default class extends Component {
 }
 
 const styles = StyleSheet.create({
-    container : {
-        // justifyContent:'center',
-        // alignItems:'center',
-        flexDirection:'row',
+    background : {
         flex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor: 'red',
+    },
+    container : {
+        flex:1,
+        width:'100%',
     },
     image : {
         flex:1,

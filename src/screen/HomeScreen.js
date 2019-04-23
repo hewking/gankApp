@@ -6,7 +6,8 @@ import {View,StyleSheet,Text,Image,FlatList
     ,StatusBar
     ,ToastAndroid
     ,TouchableOpacity
-    ,TouchableWithoutFeedback} from 'react-native'
+    ,TouchableWithoutFeedback,
+    TouchableNativeFeedback} from 'react-native'
 import {createMaterialTopTabNavigator,createTabNavigator} from 'react-navigation'
 import SvgStateImage from '../widgets/SvgStateImage'
 import DateUtils from '../util/DateUtils'
@@ -24,7 +25,7 @@ import LoadingView from '../widgets/LoadingView';
 import CategoryEntity from '../entitys/CategoryEntity';
 import * as L from '../util/L'
 import GirlEntity from '../entitys/GirlEntity';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
+// import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 
 const REQUEST_URL = 'http://gank.io/api/today'
@@ -110,7 +111,7 @@ export default class HomeScreen extends Component {
     }
 
     _renderItemView = (item) => {
-        return ( <TouchableNativeFeedback
+        return ( <TouchableOpacity
             onPress={() => {
                 // ToastExample.show('native',ToastExample.SHORT)
                 this.props.navigation.navigate('Detail',{
@@ -143,7 +144,7 @@ export default class HomeScreen extends Component {
                                 </View>
                             </View>
                 </View>
-            </TouchableNativeFeedback>)
+            </TouchableOpacity>)
     }
 
     _renderCategory = (item) => {
