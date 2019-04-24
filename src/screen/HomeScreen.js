@@ -244,8 +244,8 @@ const styles = StyleSheet.create({
     text : {
         fontSize : 16,
         padding : 8,
-        fontStyle:'normal',
         color:Colors.mainTextLabel2,
+        fontStyle:'normal',
     },
     actionButtonIcon: {
         fontSize: 20,

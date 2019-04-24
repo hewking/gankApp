@@ -31,7 +31,6 @@ import NewsDetail from './screen/NewsDetail'
 import ImageDetail from './screen/ImageDetail'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import Setting from './screen/SettingScreen'
 import { Colors } from './util/DesignSystem';
 import {getAsssetByName} from './util/Asset'
 
@@ -188,6 +187,14 @@ export default class Navigation extends React.Component {
     </SafeAreaView>)
   }
 }
+
+const SettingStack = createStackNavigator({
+  SettingPage:SettingScreen
+},{
+  defaultNavigationOptions:{
+    headerRight:null
+  }
+})
 
 class BottomTabNavigation extends Component {
     static navigationOptions = ({navigation}) => {

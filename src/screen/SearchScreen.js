@@ -39,14 +39,15 @@ export default class extends BaseListScreen {
     }
 
     render(){
-        return (<View style={{flex:1,flexDirection:'column'}}>
+        return (<View style={{flex:1,flexDirection:'column',backgroundColor:Colors.background2}}>
                         <LoadingDialog ref={(ref) => this.loading = ref}/>
                         <Search
                         ref="search_box"
                         onSearch={this.onSearch}
                         placeholder={'搜索'}
                         cancelTitle='取消'
-                        backgroundColor={Colors.greyLabel}
+                        titleCancelColor={Colors.mainTextLabel2}
+                        backgroundColor={Colors.whiteLabel}
             />
                 {super.render()}
         </View>)

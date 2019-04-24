@@ -16,10 +16,10 @@ export default class extends Component {
     }
 
     render(){
-        const {icon,title,onPress,style} = this.props
+        const {icon,title,onPress} = this.props
         const size = 20
-        return (<PlatformTouchable onPress={onPress}>
-            <View style={[styles.container, style]} >
+        return (<PlatformTouchable style={{ marginVertical:16}} onPress={onPress}>
+            <View style={[styles.container]} >
                 <Svg 
                     style={styles.icon}
                 size={size}
@@ -39,7 +39,7 @@ export default class extends Component {
 
 const styles = StyleSheet.create({
     container : {
-        backgroundColor:Colors.background2,
+        backgroundColor:Colors.whiteLabel,
         flex:1,
         flexDirection:'row',
     },

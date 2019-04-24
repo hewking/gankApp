@@ -11,6 +11,7 @@ export default class NewsDetail extends Component{
         L.d('navigation title ' + navigation.getParam('title','Gank.iO'))
         return {
             title:navigation.getParam('title','Gank.iO'),
+            headerRight:null,
         }
     }
 

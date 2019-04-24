@@ -22,6 +22,8 @@ export default class extends Component {
     }
 
     render(){
+        let {text} = this.props
+        text = text || '正在加载中...'
         return ((
             <Modal
              transparent={true}
@@ -42,7 +44,7 @@ export default class extends Component {
                                 justifyContent:'center',
                                }}>
                             <ActivityIndicator size='small' style={{margin:10}}/>
-                             <Text style={{fontSize : 12,color:Colors.whiteLabel}}>正在加载中...</Text>
+                             <Text style={{fontSize : 12,color:Colors.whiteLabel}}>{text}</Text>
                         </View>
                     </View>
             </Modal>        
