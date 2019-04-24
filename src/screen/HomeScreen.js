@@ -38,7 +38,7 @@ const Types = {
 export default class HomeScreen extends Component {
 
     static navigationOptions = {
-        header:null,
+        // header:null,
         title:'Home',
         headerStyle:{
             backgroundColor:'#4d3241'

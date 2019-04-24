@@ -119,7 +119,9 @@ export default class extends BaseListScreen {
             // 改变底部状态 调用endRefreshing函数
             // 如果 length < 10 说明没有更多可以加载了 NO_MORE
             // lenght >= 10 可以加载
-
+            results.forEach(item => {
+                item._id = item.ganhuo_id
+            });
             L.d('results : ' + results.length)
             this.setState({
                 isLoad : true,
@@ -135,8 +137,9 @@ export default class extends BaseListScreen {
     }
 
     search = (saerchText) => {
-        //`${Api.SEARCH_URL}?q=${keyword}`
-        let url = 'http://gank.io/api/data/Android/10/1'
+        let url = `${Api.SEARCH_URL}/${saerchText}/category/all/count/20/page/1`
+        // let url = 'http://gank.io/api/data/Android/10/1'
+        L.d('load url : ' + url)
         this.loadData(url)
     }
 

@@ -26,7 +26,7 @@ export default class extends Component {
              transparent={true}
               visible={this.state.modalVisible}
               onRequestClose={() => {
-                alert("Modal has been closed.");
+                  this.setModalVisible(false)
               }}
             >
                     <View style={{flex:1,

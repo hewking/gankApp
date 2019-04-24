@@ -168,60 +168,12 @@ const BottomTabNavigator = createBottomTabNavigator({
   }
 
 }, {
-  // 自定义底部tab
-  defaultNavigationOptions: ({navigation}) => {
-    tabBarIcon: ({
-      focused,
-      tintColor
-    }) => {
-      // const { routeName } = navigation.state;
-      // // let IconComponent = Ionicons;
-      // let iconName;
-      // if (routeName === 'Home') {
-      //   iconName = `ios-car`;
-      //   // Sometimes we want to add badges to some icons. 
-      //   // You can check the implementation below.
-      //   // IconComponent = HomeIconWithBadge; 
-      // } else if (routeName === 'Girl') {
-      //   iconName = `ios-car`;
-      // } 
-      // else {
-      //   iconName = `ios-car`
-      // }
-
-      // iconName = `ios-car`
-
-      // You can return any component that you like here!
-      return <AntDesign name={`minuscircle`} size={25} color={tintColor} />;  
-    }
-  },
   tabBarOptions: {
     activeTintColor: Colors.colorPrimary,
     inactiveTintColor:Colors.darkLabel,
-    // style: {
-    //   backgroundColor: Platform.select({
-    //     ios: 'white',
-    //     android: Colors.whiteLabel
-    //   }),
-    //   borderTopColor: 'transparent',
-    //   borderTopWidth: 0,
-    //   elevation: 4
-    // },
-    // labelStyle: {
-    //   color: Platform.select({
-    //     ios: Colors.colorPrimary,
-    //     android: Colors.colorPrimary
-    //   })
-    // },
-    // indicatorStyle: {
-    //   backgroundColor: '#fff'
-    // },
-  //   showIcon:'true',
-  //   showLabel:'true',
   },
   initialRouteName:'Home',
   backBehavior:'initialRoute',
-
 })
 
 export default class Navigation extends React.Component {
@@ -258,7 +210,7 @@ class BottomTabNavigation extends Component {
 }
 
 const RootNavigator = createStackNavigator({
-  Main : BottomTabNavigation,
+  Main : BottomTabNavigator,
   ImageDetail:ImageDetail,
   Detail:NewsDetail,
   Responder : ResponderTestScreen,
@@ -267,14 +219,15 @@ const RootNavigator = createStackNavigator({
   // 全屏模式
   mode:'card',
   headerMode:'screen',
-  defaultNavigationOptions:{
+  defaultNavigationOptions: ({navigation}) => {
     // header:{
     //     style:{
     //       // elevation:0,// remove shadow on android
     //       shadowOpacity:0,// remove shadow on iOS
     //     }
     // },
-    title:'Gank.io',
+    return {
+      title:'Gank.io',
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,
@@ -284,6 +237,14 @@ const RootNavigator = createStackNavigator({
     headerTitleStyle:{
         fontWeight:'bold'
     },
+    headerRight:<TouchableNativeFeedback onPress = {() => {
+      navigation.navigate('Search')
+   }}>
+    <Svg  style={{padding:16}}
+                    size={24}
+                    icon={'icon_search'}/>
+   </TouchableNativeFeedback>
+    }
     
 }})
 
