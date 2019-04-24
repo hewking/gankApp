@@ -7,6 +7,7 @@ import {View
     ,StyleSheet} from 'react-native'
 import { Colors } from '../util/DesignSystem';
 import Svg from '../component/Svg'
+import PlatformTouchable from '../widgets/PlatformTouchable'
 
 export default class extends Component {
 
@@ -17,7 +18,7 @@ export default class extends Component {
     render(){
         const {icon,title,onPress,style} = this.props
         const size = 20
-        return (<TouchableNativeFeedback onPress={onPress}>
+        return (<PlatformTouchable onPress={onPress}>
             <View style={[styles.container, style]} >
                 <Svg 
                     style={styles.icon}
@@ -31,7 +32,7 @@ export default class extends Component {
                 icon={'icon_next'}/>
                 </View>
             </View>
-        </TouchableNativeFeedback>)
+        </PlatformTouchable>)
     }
 
 }

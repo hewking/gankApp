@@ -27,7 +27,7 @@ export default class extends BaseListScreen {
     static navigationOptions = ({navigation}) => {
 
         return {
-            title:'搜索'
+            // title:'搜索'
             // headerTitle:<View style={{flex:1}}><Search
             //     style={{backgroundColor:Colors.colorPrimary}}
             // /></View>,
