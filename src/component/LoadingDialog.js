@@ -5,6 +5,7 @@ import {View
         ,ActivityIndicator
         ,Text} from 'react-native'
 import LoadingView from '../widgets/LoadingView';
+import {Colors} from '../util/DesignSystem'
 
 export default class extends Component {
 
@@ -29,15 +30,19 @@ export default class extends Component {
                   this.setModalVisible(false)
               }}
             >
-                    <View style={{flex:1,
+                    <View style={{
+                                flex:1,
                                 alignItems:'center',
                                 justifyContent:'center',}} >
                         <View style={{
                                 backgroundColor:'#1b1f2aac',
                                 borderRadius:3,
-                                width:50,
-                                height:50}}>
-                            <LoadingView/>
+                                padding:10,
+                                alignItems:'center',
+                                justifyContent:'center',
+                               }}>
+                            <ActivityIndicator size='small' style={{margin:10}}/>
+                             <Text style={{fontSize : 12,color:Colors.whiteLabel}}>正在加载中...</Text>
                         </View>
                     </View>
             </Modal>        
