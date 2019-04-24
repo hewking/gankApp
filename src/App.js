@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 import {
   createStackNavigator,
-  // createBottomTabNavigator,
+  createBottomTabNavigator,
   createAppContainer,
   createTabNavigator,
   createMaterialTopTabNavigator,
@@ -22,7 +22,7 @@ import {
 
 import {Context} from './context'
 
-import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
+// import {createBottomTabNavigator,BottomTabBar} from 'react-navigation-tabs'
 import fontelloConfig from './font/config.json'
 
 import HomeScreen from './screen/HomeScreen'
@@ -189,7 +189,9 @@ export default class Navigation extends React.Component {
 }
 
 const SettingStack = createStackNavigator({
-  SettingPage:SettingScreen
+  SettingPage:{
+    screen:SettingScreen
+  }
 },{
   defaultNavigationOptions:{
     headerRight:null

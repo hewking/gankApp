@@ -4,6 +4,8 @@ import {View,Button,Text,StyleSheet,TouchableOpacity
 import {WebView} from 'react-native-webview'
 import * as L from '../util/L'
 import Svg from '../component/Svg'
+import ActionButton from 'react-native-action-button'
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class NewsDetail extends Component{
 
@@ -22,6 +24,11 @@ export default class NewsDetail extends Component{
         const title = navigation.getParam('title','')
 
         return (<View style={styles.container}>
+            <ActionButton.Item 
+            style={{position:'absolute',bottom:200,right:10}}
+            buttonColor='#1abc9c' title="搜索" onPress={() => {}}>
+                        <Icon name="md-search" style={styles.actionButtonIcon} />
+            </ActionButton.Item>
             <WebView
                 source={{uri:url}}
             />
@@ -36,5 +43,10 @@ const styles = StyleSheet.create({
     },
     webview : {
 
-    }
+    },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: 'white',
+      }
 })
