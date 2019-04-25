@@ -28,6 +28,7 @@ export default class extends BaseListScreen {
 
         return {
             headerRight:null,
+            // title:'搜索',
             // headerTitle:<View style={{flex:1}}><Search
             //     style={{backgroundColor:Colors.colorPrimary}}
             // /></View>,
