@@ -237,7 +237,7 @@ const RootNavigator = createStackNavigator({
     //     }
     // },
     return {
-      title:'Gank.io',
+      title:'iOS开发助手',
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,
