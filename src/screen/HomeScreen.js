@@ -61,6 +61,10 @@ export default class HomeScreen extends Component {
         this.bindItem = this.bindItem.bind(this)
     }
 
+    componentDidMount(){
+
+    }
+
     render(){
         status = this.state.isLoad
         if (status) {

@@ -24,11 +24,11 @@ export default class NewsDetail extends Component{
         const title = navigation.getParam('title','')
 
         return (<View style={styles.container}>
-            <ActionButton.Item 
+            {/* <ActionButton.Item 
             style={{position:'absolute',bottom:200,right:10}}
             buttonColor='#1abc9c' title="搜索" onPress={() => {}}>
                         <Icon name="md-search" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
+            </ActionButton.Item> */}
             <WebView
                 source={{uri:url}}
             />
