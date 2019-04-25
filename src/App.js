@@ -44,6 +44,7 @@ import I18n from './res/i18n/i18n'
 import SvgStateImage from './widgets/SvgStateImage'
 import Svg from './component/Svg'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
+import PlatformTouchable from './widgets/PlatformTouchable';
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
@@ -104,7 +105,7 @@ const BottomTabNavigator = createBottomTabNavigator({
   Home: {
     screen:HomeScreen,
     navigationOptions:{
-      tabBarLabel:I18n.t('latest_today'),
+      tabBarLabel:'最新',
       tabBarIcon:({tintColor,focused}) => {
         let iconName = `infocirlce`
         return (<SvgStateImage
@@ -201,13 +202,13 @@ const SettingStack = createStackNavigator({
 class BottomTabNavigation extends Component {
     static navigationOptions = ({navigation}) => {
     return {
-      headerRight:<TouchableNativeFeedback onPress = {() => {
+      headerRight:<PlatformTouchable onPress = {() => {
         navigation.navigate('Search')
     }}>
       <Svg  style={{padding:16}}
                       size={24}
                       icon={'icon_search'}/>
-     </TouchableNativeFeedback>
+     </PlatformTouchable>
     
     }
   }
@@ -246,13 +247,13 @@ const RootNavigator = createStackNavigator({
     headerTitleStyle:{
         fontWeight:'bold'
     },
-    headerRight:<TouchableNativeFeedback onPress = {() => {
+    headerRight:<PlatformTouchable onPress = {() => {
       navigation.navigate('Search')
    }}>
     <Svg  style={{padding:16}}
                     size={24}
                     icon={'icon_search'}/>
-   </TouchableNativeFeedback>
+   </PlatformTouchable>
     }
     
 }})
