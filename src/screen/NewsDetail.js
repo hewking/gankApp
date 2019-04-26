@@ -28,11 +28,11 @@ export default class NewsDetail extends Component{
             <WebView
                 source={{uri:url}}
             />
-                        <View
+                        {/* <View
             style={{position:'absolute',bottom:80,right:35}}
             onPress={() => {}}>
                         <Icon name="ios-heart" style={styles.actionButtonIcon} />
-            </View>
+            </View> */}
         </View>)
     }
 
