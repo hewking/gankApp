@@ -10,6 +10,7 @@ gank.io app
 ![screen5](https://github.com/hewking/gankApp/blob/master/art/screen5.png)
 ![screen6](https://github.com/hewking/gankApp/blob/master/art/screen6.png)
 ![screen7](https://github.com/hewking/gankApp/blob/master/art/screen7.png)
+![screen8](https://github.com/hewking/gankApp/blob/master/art/screen8.png)
 
 
 
