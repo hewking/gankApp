@@ -6,6 +6,7 @@ import * as L from '../util/L'
 import Svg from '../component/Svg'
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Colors } from '../util/DesignSystem';
 
 export default class NewsDetail extends Component{
 
@@ -24,14 +25,15 @@ export default class NewsDetail extends Component{
         const title = navigation.getParam('title','')
 
         return (<View style={styles.container}>
-            <ActionButton.Item 
-            style={{position:'absolute',bottom:200,right:10}}
-            buttonColor='#1abc9c' title="搜索" onPress={() => {}}>
-                        <Icon name="md-search" style={styles.actionButtonIcon} />
-            </ActionButton.Item>
+
             <WebView
                 source={{uri:url}}
             />
+                        <View
+            style={{position:'absolute',bottom:80,right:35}}
+            onPress={() => {}}>
+                        <Icon name="ios-heart" style={styles.actionButtonIcon} />
+            </View>
         </View>)
     }
 
@@ -47,6 +49,6 @@ const styles = StyleSheet.create({
     actionButtonIcon: {
         fontSize: 20,
         height: 22,
-        color: 'white',
+        color: Colors.colorPrimary,
       }
 })
