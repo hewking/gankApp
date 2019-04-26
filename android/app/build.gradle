@@ -109,7 +109,7 @@ android {
         versionName "1.0"
         ndk {  
             abiFilters "armeabi-v7a", "x86"  
-        } 
+        }
     }
     splits {
         abi {
@@ -141,6 +141,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-splash-screen')
     implementation project(':realm')
     implementation project(':react-native-i18n')
     implementation project(':react-native-device-info')

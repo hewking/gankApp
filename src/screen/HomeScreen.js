@@ -26,6 +26,7 @@ import CategoryEntity from '../entitys/CategoryEntity';
 import * as L from '../util/L'
 import GirlEntity from '../entitys/GirlEntity';
 import PlatformTouchable from '../widgets/PlatformTouchable'
+import SplashScreen from 'react-native-splash-screen'
 
 const REQUEST_URL = 'http://gank.io/api/today'
 
@@ -59,6 +60,10 @@ export default class HomeScreen extends Component {
         }
 
         this.bindItem = this.bindItem.bind(this)
+    }
+
+    componentDidMount(){
+        // SplashScreen.hide()
     }
 
     render(){

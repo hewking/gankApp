@@ -25,7 +25,6 @@ export default class NewsDetail extends Component{
         const title = navigation.getParam('title','')
 
         return (<View style={styles.container}>
-
             <WebView
                 source={{uri:url}}
             />
