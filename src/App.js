@@ -179,13 +179,13 @@ const BottomTabNavigator = createBottomTabNavigator({
 export default class Navigation extends React.Component {
 
   render(){
-    return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
+    return (<View style={{backgroundColor:Colors.background,flex:1}}>
     <Context.Provider>
     <StatusBar barStyle='light-content' backgroundColor={Colors.colorPrimary}></StatusBar>
       <AppContainer/>
     </Context.Provider>
        
-    </SafeAreaView>)
+    </View>)
   }
 }
 
