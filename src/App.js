@@ -45,6 +45,7 @@ import SvgStateImage from './widgets/SvgStateImage'
 import Svg from './component/Svg'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 import PlatformTouchable from './widgets/PlatformTouchable';
+import SplashScreen from 'react-native-splash-screen'
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
@@ -177,6 +178,10 @@ const BottomTabNavigator = createBottomTabNavigator({
 })
 
 export default class Navigation extends React.Component {
+
+  componentDidMount(){
+    SplashScreen.hide()
+  }
 
   render(){
     return (<SafeAreaView style={{backgroundColor:Colors.background,flex:1}}>
