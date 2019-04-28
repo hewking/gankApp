@@ -242,7 +242,7 @@ const RootNavigator = createStackNavigator({
     //     }
     // },
     return {
-      title:'iOS开发助手',
+      title:'iOS开发资讯',
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,

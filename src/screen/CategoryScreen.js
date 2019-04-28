@@ -119,7 +119,7 @@ export default class extends Component {
                             />                        
                             <Text style={[styles.text,{fontSize:14,padding:4}]}>作者:{item.who}</Text>
                     </View>
-                    <View style={{flex:2,flexDirection:'row',alignItems:'center'}}>
+                    <View style={{flex:1.4,flexDirection:'row',alignItems:'center'}}>
                             <SvgStateImage
                                 style={styles.img}
                                 focusedIcon={'icon_meditor_time'}

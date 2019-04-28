@@ -5,6 +5,7 @@ import {View
         ,StyleSheet
         ,Button
         ,TextInput
+        ,Platform
         } from 'react-native'
 
 import { Colors } from '../util/DesignSystem';
@@ -28,7 +29,7 @@ export default class extends BaseListScreen {
 
         return {
             headerRight:null,
-            // title:'搜索',
+            title:Platform.select({android:'Android开发资讯',ios:null}),
             // headerTitle:<View style={{flex:1}}><Search
             //     style={{backgroundColor:Colors.colorPrimary}}
             // /></View>,
@@ -86,7 +87,7 @@ export default class extends BaseListScreen {
                             />                        
                             <Text style={[styles.text,{fontSize:14,padding:4}]}>作者:{item.who}</Text>
                     </View>
-                    <View style={{flex:2,flexDirection:'row',alignItems:'center'}}>
+                    <View style={{flex:1.4,flexDirection:'row',alignItems:'center'}}>
                             <SvgStateImage
                                 style={styles.img}
                                 focusedIcon={'icon_meditor_time'}
