@@ -3,12 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/icon_splash"
     android:gravity="center">
-
+<!-- 
      <ImageView
-        slaleType="FIT_XY"
+        slaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/icon_splash"
-    />
+    /> -->
 </LinearLayout>
