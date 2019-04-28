@@ -3,6 +3,12 @@
 const BASE_URL = 'http://gank.io/api'
 
 /**
+ * appId = gankApp
+ * 用于切换是正常显示还是咋整
+ */
+const PUSH_URL = 'http://1256app.com:8080/biz/getAppConfig?appid='
+
+/**
  * 搜索 API
 http://gank.io/api/search/query/listview/category/Android/count/10/page/1 
 注：
