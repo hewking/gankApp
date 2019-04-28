@@ -1,6 +1,15 @@
 # gankApp
 gank.io app
 
+Appstoe 上架
+关键词： iOS  Android gank 前端 妹子 技术
+
+宣传文本：
+
+描述：
+
+
+
 #### 效果图 Andorid
 
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
