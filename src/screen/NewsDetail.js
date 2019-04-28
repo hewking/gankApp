@@ -8,9 +8,9 @@ import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../util/DesignSystem';
 import { createStackNavigator,createAppContainer } from 'react-navigation';
-import {AppName} from './constant/Constants'
+import {AppName} from '../constant/Constants'
 
-export class WebScreen extends Component{
+export default class NewsDetail extends Component{
 
     static navigationOptions = ({navigation}) => {
         L.d('navigation title ' + navigation.getParam('title','Gank.iO'))
@@ -53,22 +53,3 @@ const styles = StyleSheet.create({
         color: Colors.colorPrimary,
       }
 })
-
-const stack = createStackNavigator({
-    WebView:WebScreen
-},{
-    defaultNavigationOptions:{
-        title:AppName,
-    headerStyle:{
-        backgroundColor:Colors.colorPrimary,
-        shadowOpacity:0,
-        elevation:0,
-    },
-    headerTintColor:Colors.whiteLabel,
-    headerTitleStyle:{
-        fontWeight:'bold'
-    }
-    }
-})
-
-export default createAppContainer(stack)
