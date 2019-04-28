@@ -7,13 +7,14 @@ import Svg from '../component/Svg'
 import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../util/DesignSystem';
+import { createStackNavigator,createAppContainer } from 'react-navigation';
 
-export default class NewsDetail extends Component{
+export class WebScreen extends Component{
 
     static navigationOptions = ({navigation}) => {
         L.d('navigation title ' + navigation.getParam('title','Gank.iO'))
         return {
-            title:navigation.getParam('title','Gank.iO'),
+            title:navigation.getParam('title','iOS开发助手'),
             headerRight:null,
         }
     }
@@ -51,3 +52,22 @@ const styles = StyleSheet.create({
         color: Colors.colorPrimary,
       }
 })
+
+const stack = createStackNavigator({
+    WebView:WebScreen
+},{
+    defaultNavigationOptions:{
+        title:'iOS开发资讯',
+    headerStyle:{
+        backgroundColor:Colors.colorPrimary,
+        shadowOpacity:0,
+        elevation:0,
+    },
+    headerTintColor:Colors.whiteLabel,
+    headerTitleStyle:{
+        fontWeight:'bold'
+    }
+    }
+})
+
+export default createAppContainer(stack)
