@@ -48,6 +48,7 @@ import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 import PlatformTouchable from './widgets/PlatformTouchable';
 import SplashScreen from 'react-native-splash-screen'
 import WebScreen from './screen/WebScreen';
+import {AppName} from './constant/Constants'
 
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
@@ -259,7 +260,7 @@ const RootNavigator = createStackNavigator({
     //     }
     // },
     return {
-      title:'iOS开发资讯',
+      title:AppName,
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,

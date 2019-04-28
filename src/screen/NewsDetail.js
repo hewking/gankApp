@@ -8,13 +8,14 @@ import ActionButton from 'react-native-action-button'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Colors } from '../util/DesignSystem';
 import { createStackNavigator,createAppContainer } from 'react-navigation';
+import {AppName} from './constant/Constants'
 
 export class WebScreen extends Component{
 
     static navigationOptions = ({navigation}) => {
         L.d('navigation title ' + navigation.getParam('title','Gank.iO'))
         return {
-            title:navigation.getParam('title','iOS开发助手'),
+            title:navigation.getParam('title',AppName),
             headerRight:null,
         }
     }
@@ -57,7 +58,7 @@ const stack = createStackNavigator({
     WebView:WebScreen
 },{
     defaultNavigationOptions:{
-        title:'iOS开发资讯',
+        title:AppName,
     headerStyle:{
         backgroundColor:Colors.colorPrimary,
         shadowOpacity:0,
