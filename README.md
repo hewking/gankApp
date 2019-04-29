@@ -22,6 +22,12 @@ jyt57784615———2fd1w3ge31SF12E
 #### 技术支持
 https://hewking.github.io/posts/iOS%E5%BC%80%E5%8F%91%E8%B5%84%E8%AE%AF/
 
+
+#### JPush 设置
+应用名称 iOS开发资讯
+AppKey 4657f16ae40f000bc7fa5ea1
+Master Secret af65560e9c1e262a21ad6ee5
+
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
 ![screen2](https://github.com/hewking/gankApp/blob/master/art/screen2.png)
 ![screen3](https://github.com/hewking/gankApp/blob/master/art/screen3.png)

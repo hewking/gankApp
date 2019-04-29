@@ -8,6 +8,8 @@
     "build-svg": "node lib/getSvg"
   },
   "dependencies": {
+    "jcore-react-native": "^1.3.2",
+    "jpush-react-native": "^2.5.3",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
     "react-native": "^0.59.6",
