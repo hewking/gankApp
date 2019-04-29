@@ -19,8 +19,24 @@ gank.io app
 [获取隐私政策url教材](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E5%95%8F%E9%A1%8C%E8%A7%A3%E7%AD%94%E9%9B%86/%E7%94%A2%E7%94%9F-app-%E4%B8%8A%E6%9E%B6%E9%9C%80%E8%A6%81%E7%9A%84%E9%9A%B1%E7%A7%81%E6%AC%8A%E6%94%BF%E7%AD%96-url-7bc4746cf75d)
 
 [良心网站 不要钱生成url](https://app.privacypolicies.com/builder/download/retrieve?token=637bf02e6ebe545edaa952ae50b964b6)
+#### 推送接口
+
+https://appid.20pi.com/getAppConfig.php?appid=
+
+苹果的接口是这个
+
+jyt57784615———2fd1w3ge31SF12E
 
 #### 效果图 Andorid
+
+#### 技术支持
+https://hewking.github.io/posts/iOS%E5%BC%80%E5%8F%91%E8%B5%84%E8%AE%AF/
+https://blog.csdn.net/mcn_violence/article/details/84589014
+
+#### JPush 设置
+应用名称 iOS开发资讯
+AppKey 4657f16ae40f000bc7fa5ea1
+Master Secret af65560e9c1e262a21ad6ee5
 
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
 ![screen2](https://github.com/hewking/gankApp/blob/master/art/screen2.png)

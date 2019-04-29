@@ -107,6 +107,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "4657f16ae40f000bc7fa5ea1",
+                APP_CHANNEL : "default"
+        ]
+
         ndk {  
             abiFilters "armeabi-v7a", "x86"  
         }
@@ -141,6 +146,8 @@ android {
 }
 
 dependencies {
+    implementation project(':jcore-react-native')
+    implementation project(':jpush-react-native')
     implementation project(':react-native-splash-screen')
     implementation project(':realm')
     implementation project(':react-native-i18n')
