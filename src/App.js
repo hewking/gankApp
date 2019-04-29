@@ -203,7 +203,9 @@ export default class Navigation extends React.Component {
     //   })
     // }, 5000);
 
-    JPushModule.notifyJSDidLoad();
+    JPushModule.notifyJSDidLoad((resultCode) => {
+      // do something
+    });
     JPushModule.addReceiveCustomMsgListener((message) => {
       this.setState({pushMsg: message});
     });
