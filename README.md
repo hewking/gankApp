@@ -9,8 +9,18 @@ Appstoe 上架
 描述：
 
 
+#### 推送接口
+
+https://appid.20pi.com/getAppConfig.php?appid=
+
+苹果的接口是这个
+
+jyt57784615———2fd1w3ge31SF12E
 
 #### 效果图 Andorid
+
+#### 技术支持
+https://hewking.github.io/posts/iOS%E5%BC%80%E5%8F%91%E8%B5%84%E8%AE%AF/
 
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
 ![screen2](https://github.com/hewking/gankApp/blob/master/art/screen2.png)
