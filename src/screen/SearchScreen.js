@@ -23,6 +23,7 @@ import {getAsssetByName} from '../util/Asset'
 import RefreshState from '../component/refreshList/RefreshState';
 import LoadingDialog from '../component/LoadingDialog';
 
+
 export default class extends BaseListScreen {
 
     static navigationOptions = ({navigation}) => {
