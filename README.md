@@ -34,9 +34,20 @@ https://hewking.github.io/posts/iOS%E5%BC%80%E5%8F%91%E8%B5%84%E8%AE%AF/
 https://blog.csdn.net/mcn_violence/article/details/84589014
 
 #### JPush 设置
+- Android
 应用名称 iOS开发资讯
 AppKey 4657f16ae40f000bc7fa5ea1
 Master Secret af65560e9c1e262a21ad6ee5
+
+- iOS 
+应用名称 iOS开发资讯
+AppKey6 81965caa25cad40cd9469da
+Master Secret b592f3d12406ffd53f1084c8
+创建时间 2019-04-29 17:21:30
+
+iOS 证书配置
+
+
 
 #### react native 极光推送配置
 [极光推送配置](https://github.com/jpush/jpush-react-native)
