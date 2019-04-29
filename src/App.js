@@ -203,20 +203,27 @@ export default class Navigation extends React.Component {
     //   })
     // }, 5000);
 
-    JPushModule.notifyJSDidLoad((resultCode) => {
-      // do something
-    });
-    JPushModule.addReceiveCustomMsgListener((message) => {
-      this.setState({pushMsg: message});
-    });
-    JPushModule.addReceiveNotificationListener((message) => {
-      console.log("receive notification: " + message);
-    })
+    if (Platform.OS === 'android'){
+      JPushModule.notifyJSDidLoad((resultCode) => {
+        // do something
+      });
+      JPushModule.addReceiveCustomMsgListener((message) => {
+        this.setState({pushMsg: message});
+      });
+      JPushModule.addReceiveNotificationListener((message) => {
+        console.log("receive notification: " + message);
+      })
+    }
+
+ 
   }
 
   componentWillUnmount() {
-    JPushModule.removeReceiveCustomMsgListener();
-    JPushModule.removeReceiveNotificationListener();
+    if (Platform.OS === 'android') {
+      JPushModule.removeReceiveCustomMsgListener();
+      JPushModule.removeReceiveNotificationListener();
+    }
+   
   }
 
   render(){
