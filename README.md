@@ -21,7 +21,7 @@ jyt57784615———2fd1w3ge31SF12E
 
 #### 技术支持
 https://hewking.github.io/posts/iOS%E5%BC%80%E5%8F%91%E8%B5%84%E8%AE%AF/
-
+https://blog.csdn.net/mcn_violence/article/details/84589014
 
 #### JPush 设置
 应用名称 iOS开发资讯

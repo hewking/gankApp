@@ -50,6 +50,10 @@ import SplashScreen from 'react-native-splash-screen'
 import WebScreen from './screen/WebScreen';
 import {AppName} from './constant/Constants'
 
+//jpush
+import JPushModule from 'jpush-react-native';
+
+
 const Icon = createIconSetFromFontello(fontelloConfig, 'gankapp')
 
 // const TAB = createMaterialTopTabNavigator({
@@ -198,6 +202,19 @@ export default class Navigation extends React.Component {
     //     route:1,
     //   })
     // }, 5000);
+
+    JPushModule.notifyJSDidLoad();
+    JPushModule.addReceiveCustomMsgListener((message) => {
+      this.setState({pushMsg: message});
+    });
+    JPushModule.addReceiveNotificationListener((message) => {
+      console.log("receive notification: " + message);
+    })
+  }
+
+  componentWillUnmount() {
+    JPushModule.removeReceiveCustomMsgListener();
+    JPushModule.removeReceiveNotificationListener();
   }
 
   render(){
