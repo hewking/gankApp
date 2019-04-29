@@ -38,6 +38,15 @@ https://blog.csdn.net/mcn_violence/article/details/84589014
 AppKey 4657f16ae40f000bc7fa5ea1
 Master Secret af65560e9c1e262a21ad6ee5
 
+#### react native 极光推送配置
+[极光推送配置](https://github.com/jpush/jpush-react-native)
+
+[android ReactNative开发-集成极光推送jpush-react-native](https://lyichao.github.io/reactnative/2018/12/07/ReactNative%E5%BC%80%E5%8F%91-%E9%9B%86%E6%88%90%E6%9E%81%E5%85%89%E6%8E%A8%E9%80%81jpush-react-native/)
+
+[官方文档](https://github.com/jpush/jpush-react-native/blob/master/documents/android_usage.md)
+
+[https://zhuanlan.zhihu.com/p/38251533](React Native集成极光推送)
+
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
 ![screen2](https://github.com/hewking/gankApp/blob/master/art/screen2.png)
 ![screen3](https://github.com/hewking/gankApp/blob/master/art/screen3.png)
