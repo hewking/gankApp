@@ -45,6 +45,6 @@ public class MainActivity extends ReactActivity {
     @Override
     protected void onResume() {
     super.onResume();
-    JPushInterface.onResume(this);
+      JPushInterface.onResume(this);
     }
 }

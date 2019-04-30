@@ -48,7 +48,6 @@ Master Secret b592f3d12406ffd53f1084c8
 iOS 证书配置
 
 
-
 #### react native 极光推送配置
 [极光推送配置](https://github.com/jpush/jpush-react-native)
 
