@@ -23,6 +23,10 @@
   [JPUSHService registerDeviceToken:deviceToken];
 }
 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  NSLog(@"%@", error.description);
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
   [[NSNotificationCenter defaultCenter] postNotificationName:kJPFDidReceiveRemoteNotification object:userInfo];
@@ -63,9 +67,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [JPUSHService setupWithOption:launchOptions appKey:@"4657f16ae40f000bc7fa5ea1"
+  [self requestNotification];
+  [JPUSHService setupWithOption:launchOptions appKey:@"681965caa25cad40cd9469da"
                         channel:nil apsForProduction:nil];
-
+  [application registerForRemoteNotifications];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"gankApp"
@@ -79,6 +84,39 @@
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
   return YES;
+}
+
+/**
+ 申请权限
+ */
+-(void) requestNotification
+{
+  if (@available(iOS 10, *))
+  {
+    UNUserNotificationCenter * center = [UNUserNotificationCenter currentNotificationCenter];
+    center.delegate = self;
+    [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
+      
+      if (granted) {
+        // 允许推送
+      }else{
+        //不允许
+      }
+    }];
+  }
+  else if(@available(iOS 8 , *))
+  {
+    UIApplication * application = [UIApplication sharedApplication];
+    
+    [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil]];
+    [application registerForRemoteNotifications];
+  }
+  else
+  {
+    UIApplication * application = [UIApplication sharedApplication];
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+    [application registerForRemoteNotifications];
+  }
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
