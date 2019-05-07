@@ -59,6 +59,10 @@ iOS 证书配置
 
 [ios证书配置](https://xnxy.github.io/2018/03/08/iOS%E8%AF%81%E4%B9%A6%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8C%97/)
 
+
+#### iOS推送权限配置
+[iOS推送权限开发判断](https://www.jianshu.com/p/bdc64eb29908)
+
 ![screen1](https://github.com/hewking/gankApp/blob/master/art/screen.png)
 ![screen2](https://github.com/hewking/gankApp/blob/master/art/screen2.png)
 ![screen3](https://github.com/hewking/gankApp/blob/master/art/screen3.png)
